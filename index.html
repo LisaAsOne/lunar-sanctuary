@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lunar Sanctuary: Your Celestial Self-Care Reading</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --charcoal: #2a2a2a;
+    --charcoal-mid: #353535;
+    --charcoal-light: #444444;
+    --gold: #c9a96e;
+    --gold-light: #e2c99a;
+    --gold-pale: #f0e4cc;
+    --sage: #7a9e87;
+    --sage-light: #a8c4b0;
+    --sage-pale: #d4e6da;
+    --blush: #e8b4a8;
+    --blush-light: #f2cfc6;
+    --blush-pale: #fae8e4;
+    --cream: #faf6f0;
+    --text-main: #f5efe8;
+    --text-muted: #c8bfb4;
+    --text-soft: #9a9087;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--charcoal);
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Starfield background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(201,169,110,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 8%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 40% 30%, rgba(201,169,110,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 5%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 20%, rgba(201,169,110,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 12%, rgba(255,255,255,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 55%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 50% 70%, rgba(201,169,110,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 65%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 85%, rgba(201,169,110,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 80%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 90%, rgba(255,255,255,0.15) 0%, transparent 100%),
+      radial-gradient(2px 2px at 68% 45%, rgba(201,169,110,0.15) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 40%, rgba(255,255,255,0.25) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Subtle radial glow */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80vw;
+    height: 80vw;
+    background: radial-gradient(ellipse, rgba(122,158,135,0.06) 0%, rgba(201,169,110,0.04) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── LAYOUT ── */
+  .app {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    text-align: center;
+    padding: 64px 0 52px;
+    position: relative;
+  }
+
+  .moon-glyph {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 20px;
+    opacity: 0.8;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.06); }
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--gold-light);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--blush-light);
+  }
+
+  .tagline {
+    font-size: 0.88rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 28px 0;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,0.4), transparent);
+  }
+
+  .divider span {
+    color: var(--gold);
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  .header-desc {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* ── PAGES ── */
+  .page { display: none; animation: fadeIn 0.7s ease; }
+  .page.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── FORM CARD ── */
+  .form-card {
+    background: rgba(53, 53, 53, 0.5);
+    border: 1px solid rgba(201,169,110,0.18);
+    border-radius: 2px;
+    padding: 48px 52px;
+    backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--sage), var(--blush), transparent);
+  }
+
+  @media (max-width: 600px) {
+    .form-card { padding: 32px 24px; }
+  }
+
+  .form-intro {
+    margin-bottom: 36px;
+  }
+
+  .form-intro h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+  }
+
+  .form-intro p {
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .field-group {
+    margin-bottom: 28px;
+  }
+
+  .field-group label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 8px;
+  }
+
+  .field-group .optional-tag {
+    color: var(--text-soft);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    margin-left: 8px;
+    text-transform: none;
+    font-style: italic;
+  }
+
+  .field-group input,
+  .field-group select {
+    width: 100%;
+    background: rgba(42,42,42,0.7);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 1px;
+    padding: 14px 16px;
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  .field-group input::placeholder {
+    color: var(--text-soft);
+    font-style: italic;
+  }
+
+  .field-group input:focus,
+  .field-group select:focus {
+    border-color: rgba(201,169,110,0.5);
+    box-shadow: 0 0 0 3px rgba(201,169,110,0.06);
+  }
+
+  .field-hint {
+    font-size: 0.75rem;
+    color: var(--text-soft);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 520px) {
+    .field-row { grid-template-columns: 1fr; }
+  }
+
+  .btn-primary {
+    width: 100%;
+    margin-top: 12px;
+    padding: 18px 32px;
+    background: linear-gradient(135deg, rgba(201,169,110,0.15), rgba(201,169,110,0.08));
+    border: 1px solid rgba(201,169,110,0.45);
+    border-radius: 1px;
+    color: var(--gold-light);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,169,110,0.2), rgba(122,158,135,0.1));
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .btn-primary:hover::before { opacity: 1; }
+  .btn-primary:hover { border-color: rgba(201,169,110,0.7); }
+
+  .btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .privacy-note {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--text-soft);
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+
+  /* ── LOADING ── */
+  #loadingPage {
+    text-align: center;
+    padding: 80px 0;
+  }
+
+  .moon-phases {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .phase {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--charcoal-mid);
+    border: 1px solid rgba(201,169,110,0.3);
+    animation: phaseGlow 2.4s ease-in-out infinite;
+  }
+
+  .phase:nth-child(1) { animation-delay: 0s; }
+  .phase:nth-child(2) { animation-delay: 0.3s; background: rgba(201,169,110,0.2); }
+  .phase:nth-child(3) { animation-delay: 0.6s; background: rgba(201,169,110,0.5); border-color: var(--gold); }
+  .phase:nth-child(4) { animation-delay: 0.9s; background: rgba(201,169,110,0.3); }
+  .phase:nth-child(5) { animation-delay: 1.2s; }
+
+  @keyframes phaseGlow {
+    0%, 100% { transform: scale(1); box-shadow: none; }
+    50% { transform: scale(1.3); box-shadow: 0 0 12px rgba(201,169,110,0.4); border-color: var(--gold); }
+  }
+
+  .loading-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+  }
+
+  .loading-msg {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    letter-spacing: 0.05em;
+    min-height: 28px;
+    transition: opacity 0.5s;
+  }
+
+  .progress-track {
+    width: 200px;
+    height: 2px;
+    background: rgba(201,169,110,0.12);
+    margin: 32px auto 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--sage), var(--gold), var(--blush));
+    transition: width 0.8s ease;
+    width: 0%;
+  }
+
+  /* ── REPORT ── */
+  #reportPage { max-width: 740px; }
+
+  .report-header {
+    text-align: center;
+    padding: 40px 0 36px;
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+    margin-bottom: 40px;
+  }
+
+  .report-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+  }
+
+  .report-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .chart-meta {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  .chart-meta span { display: flex; align-items: center; gap: 6px; }
+  .chart-meta .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold);
+    display: inline-block;
+    opacity: 0.6;
+  }
+
+  /* Report sections */
+  .report-section {
+    margin-bottom: 44px;
+    animation: fadeIn 0.6s ease both;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .section-icon {
+    font-size: 20px;
+    opacity: 0.85;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--gold-light);
+    flex: 1;
+  }
+
+  .section-accent {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(201,169,110,0.5), transparent);
+  }
+
+  .report-card {
+    background: rgba(53,53,53,0.35);
+    border: 1px solid rgba(201,169,110,0.12);
+    border-radius: 1px;
+    padding: 28px 32px;
+    line-height: 1.85;
+    font-size: 0.93rem;
+    color: var(--text-main);
+    font-weight: 300;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .report-card.sage-tint {
+    border-color: rgba(122,158,135,0.2);
+    background: rgba(122,158,135,0.05);
+  }
+
+  .report-card.blush-tint {
+    border-color: rgba(232,180,168,0.2);
+    background: rgba(232,180,168,0.04);
+  }
+
+  .report-card p { margin-bottom: 14px; }
+  .report-card p:last-child { margin-bottom: 0; }
+
+  .report-card em {
+    color: var(--blush-light);
+    font-style: italic;
+  }
+
+  .report-card strong {
+    color: var(--gold-light);
+    font-weight: 500;
+  }
+
+  /* Moon phase visual */
+  .moon-phase-display {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+
+  .moon-visual {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid rgba(201,169,110,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    flex-shrink: 0;
+    animation: breathe 6s ease-in-out infinite;
+  }
+
+  .moon-phase-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+  }
+
+  .moon-phase-info p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Self-care pillars */
+  .care-pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .pillar {
+    background: rgba(42,42,42,0.6);
+    border: 1px solid rgba(201,169,110,0.1);
+    border-radius: 1px;
+    padding: 20px;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+
+  .pillar:hover { border-color: rgba(201,169,110,0.3); }
+
+  .pillar-icon { font-size: 24px; margin-bottom: 10px; display: block; }
+  .pillar-name {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 8px;
+  }
+  .pillar-text {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* Affirmation block */
+  .affirmation {
+    text-align: center;
+    padding: 36px 32px;
+    border: 1px solid rgba(232,180,168,0.25);
+    background: rgba(232,180,168,0.04);
+    position: relative;
+  }
+
+  .affirmation::before,
+  .affirmation::after {
+    content: '✦';
+    position: absolute;
+    color: var(--gold);
+    opacity: 0.4;
+    font-size: 12px;
+  }
+  .affirmation::before { top: 14px; left: 20px; }
+  .affirmation::after { bottom: 14px; right: 20px; }
+
+  .affirmation p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 1.55rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--blush-light);
+    line-height: 1.6;
+  }
+
+  /* Download button */
+  .report-actions {
+    text-align: center;
+    padding-top: 48px;
+    border-top: 1px solid rgba(201,169,110,0.12);
+    margin-top: 48px;
+  }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 48px;
+    background: linear-gradient(135deg, rgba(201,169,110,0.2), rgba(122,158,135,0.12));
+    border: 1px solid rgba(201,169,110,0.5);
+    border-radius: 1px;
+    color: var(--gold-light);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s;
+    text-decoration: none;
+  }
+
+  .btn-download:hover {
+    background: linear-gradient(135deg, rgba(201,169,110,0.3), rgba(122,158,135,0.2));
+    border-color: var(--gold);
+    box-shadow: 0 0 32px rgba(201,169,110,0.12);
+  }
+
+  .btn-new {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    background: none;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    transition: color 0.3s;
+  }
+
+  .btn-new:hover { color: var(--text-muted); }
+
+  .cusp-note {
+    background: rgba(201,169,110,0.08);
+    border-left: 2px solid rgba(201,169,110,0.4);
+    padding: 10px 14px;
+    font-size: 0.83rem;
+    color: var(--gold-light);
+    margin-bottom: 16px;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .error-msg {
+    background: rgba(232,180,168,0.1);
+    border: 1px solid rgba(232,180,168,0.3);
+    color: var(--blush-light);
+    padding: 12px 16px;
+    font-size: 0.83rem;
+    margin-top: 12px;
+    display: none;
+    font-style: italic;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 32px 0 0;
+    font-size: 0.72rem;
+    color: var(--text-soft);
+    letter-spacing: 0.1em;
+  }
+
+  footer span { color: var(--sage); opacity: 0.7; }
+
+  /* Select styling */
+  select option { background: #2a2a2a; color: var(--text-main); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--charcoal); }
+  ::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.25); }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <span class="moon-glyph">☽ ✦ ☾</span>
+    <p class="tagline">13 Signs · 13 Moons · Real Sky</p>
+    <h1>Lunar<br><em>Sanctuary</em></h1>
+    <div class="divider"><span>✦</span></div>
+    <div style="max-width:560px;margin:0 auto 40px;text-align:center;padding:0 24px;">
+      <p style="margin-bottom:16px;line-height:1.9;font-size:1rem;">You're the one others come to. You hold space, support, and guide. But when it comes to yourself, you're still waiting.</p>
+      <p style="margin-bottom:16px;line-height:1.9;font-size:1rem;">This space is for you. <span style="color:var(--gold-light);font-style:italic;">Your turn to receive.</span> To notice where your energy is still leaking. And to finally close the loop.</p>
+      <div style="margin-top:8px;text-align:center;">
+        <p style="line-height:1.9;font-size:0.95rem;color:var(--gold-light);font-style:italic;">Enter your own Lunar Sanctuary, guided by your personal astrology and the 28-day rhythm of the moon.</p>
+        <p style="color:var(--gold);font-size:1rem;margin-top:8px;letter-spacing:4px;">☽ ✦ ☾</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- FORM PAGE -->
+  <div id="formPage" class="page active">
+    <div class="form-card">
+      <div class="form-intro">
+        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:32px;margin-bottom:8px;">
+          <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold-light);margin-bottom:24px;">Your True Sky Placement</h2>
+          <p style="margin-bottom:20px;line-height:1.9;font-size:0.95rem;color:var(--sage-light);font-style:italic;">Because if you're using the wrong map, you'll keep going round in circles.</p>
+          <p style="margin-bottom:16px;line-height:1.9;">The conventional system most people use was fixed in place two thousand years ago. It tracks the seasons, not the true sky as it is now. It's built on twelve signs, a closed system. Twelve divides evenly. It repeats.</p>
+          <p style="margin-bottom:16px;line-height:1.9;">But the real sky has thirteen. Ophiuchus, the 13th sign, sits between Sagittarius and Scorpius. It was always there. It was excluded because it does not fit neatly into the system.</p>
+          <p style="margin-bottom:16px;line-height:1.9;font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold-light);"><strong>Thirteen introduces an interruption.</strong> A place where the pattern cannot just continue as it was. That is where your loop breaks.</p>
+          <p style="margin-bottom:16px;line-height:1.9;">Every 2 to 3 days, the Moon enters a new sign. Your reading shifts with it. This is the practice. Watching the pattern in real time, until your nervous system remembers its true rhythm.</p>
+          <p style="margin-bottom:0;line-height:1.9;">Work with all thirteen signs. Track the Moon as it moves through them. Close the loop. Finally move forward.</p>
+        </div>
+
+      </div>
+
+      <div class="field-group">
+        <label>Your Name</label>
+        <input type="text" id="name" placeholder="Your name" />
+      </div>
+
+      <div class="field-group">
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="Your email address" />
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Date of Birth</label>
+          <input type="date" id="dob" />
+        </div>
+        <div class="field-group">
+          <label>Time of Birth <span class="optional-tag">optional</span></label>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <select id="birthHour" style="flex:1;">
+              <option value="">Hr</option>
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+              <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+              <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+              <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+            </select>
+            <span style="color:var(--text-soft);font-size:1.1rem;">:</span>
+            <select id="birthMinute" style="flex:1;">
+              <option value="">Min</option>
+              <option value="00">00</option><option value="05">05</option><option value="10">10</option>
+              <option value="15">15</option><option value="20">20</option><option value="25">25</option>
+              <option value="30">30</option><option value="35">35</option><option value="40">40</option>
+              <option value="45">45</option><option value="50">50</option><option value="55">55</option>
+            </select>
+            <select id="birthAmPm" style="flex:1.5;min-width:90px;">
+              <option value="">AM/PM</option>
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Place of Birth</label>
+        <input type="text" id="birthPlace" placeholder="City, State, Country" />
+        <p class="field-hint">e.g. Austin, Texas, USA or Bristol, England, UK</p>
+      </div>
+
+      <div class="field-row" id="latlonRow" style="display:none">
+        <div class="field-group">
+          <label>Latitude <span class="optional-tag">if geocoding fails</span></label>
+          <input type="number" id="manualLat" placeholder="e.g. 50.7676" step="0.0001" />
+        </div>
+        <div class="field-group">
+          <label>Longitude <span class="optional-tag">if geocoding fails</span></label>
+          <input type="number" id="manualLon" placeholder="e.g. 0.2901" step="0.0001" />
+        </div>
+      </div>
+      <p id="geocodeNote" style="display:none;font-size:0.75rem;color:var(--blush-light);margin-top:-16px;font-style:italic;">Geocoding unavailable — enter coordinates manually for ASC and house calculations. <a href="https://www.latlong.net" target="_blank" style="color:var(--gold);text-decoration:underline;">Find your coordinates here.</a></p>
+
+      <button class="btn-primary" onclick="generateReading()">
+        → &nbsp; Enter your Lunar Sanctuary &nbsp;
+      </button>
+
+      <div class="error-msg" id="errorMsg">Please fill in all required fields.</div>
+      <p class="privacy-note">Your details are used only to generate your reading. Nothing else.</p>
+    </div>
+  </div>
+
+  <!-- LOADING PAGE -->
+  <div id="loadingPage" class="page">
+    <div class="moon-phases">
+      <div class="phase"></div>
+      <div class="phase"></div>
+      <div class="phase"></div>
+      <div class="phase"></div>
+      <div class="phase"></div>
+    </div>
+    <h2 class="loading-title">Reading the real sky for you…</h2>
+    <p class="loading-msg" id="loadingMsg">Locating your true placement</p>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- REPORT PAGE -->
+  <div id="reportPage" class="page">
+    <div class="report-header">
+      <p class="report-subtitle">True Sidereal Reading · AsOne.Earth</p>
+      <h2 class="report-name" id="reportName">Your Reading</h2>
+      <div class="chart-meta" id="chartMeta"></div>
+    </div>
+
+    <div style="padding:24px 28px;margin-bottom:40px;border:1px solid rgba(201,169,110,0.15);background:rgba(201,169,110,0.04);text-align:center;">
+      <p style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold-light);margin-bottom:16px;">Your Reading Includes</p>
+      <p style="margin-bottom:10px;line-height:1.8;font-size:0.88rem;color:var(--text-muted);">✦ &nbsp;Your true sky sun, moon and rising (based on all 13 signs)</p>
+      <p style="margin-bottom:10px;line-height:1.8;font-size:0.88rem;color:var(--text-muted);">✦ &nbsp;Where the Moon is right now and what it's activating</p>
+      <p style="margin-bottom:10px;line-height:1.8;font-size:0.88rem;color:var(--text-muted);">✦ &nbsp;The specific pattern you're caught in (and why)</p>
+      <p style="margin-bottom:0;line-height:1.8;font-size:0.88rem;"><span style="color:var(--text-muted);">✦ &nbsp;</span><span style="color:var(--sage-light);">Next steps and how to come back to this as the Moon moves every 2 to 3 days</span></p>
+    </div>
+
+    <!-- Section 1: Soul Portrait -->
+    <div class="report-section" id="soulSection">
+      <div class="section-header">
+        <span class="section-icon">☀</span>
+        <h3 class="section-title">Where You Actually Are</h3>
+        <div class="section-accent"></div>
+      </div>
+      <div class="report-card" id="soulContent"></div>
+    </div>
+
+    <!-- Section 2: Moon Cycle -->
+    <div class="report-section" id="moonSection">
+      <div class="section-header">
+        <span class="section-icon">☽</span>
+        <h3 class="section-title">The Current Signal</h3>
+        <div class="section-accent"></div>
+      </div>
+      <div class="report-card sage-tint">
+        <div class="moon-phase-display" id="moonPhaseDisplay"></div>
+        <div id="moonContent"></div>
+      </div>
+    </div>
+
+    <!-- Section 3: Self-Care Pillars -->
+    <div class="report-section" id="careSection">
+      <div class="section-header">
+        <span class="section-icon">🌿</span>
+        <h3 class="section-title" id="careSectionTitle">How to Receive What Lunar Offers</h3>
+        <div class="section-accent"></div>
+      </div>
+      <div class="report-card" id="careContent"></div>
+      <div class="care-pillars" id="carePillars"></div>
+    </div>
+
+    <!-- Section 4: Healer's Reminder -->
+    <div class="report-section" id="healerSection">
+      <div class="section-header">
+        <span class="section-icon">♡</span>
+        <h3 class="section-title">The Loop</h3>
+        <div class="section-accent"></div>
+      </div>
+      <div class="report-card blush-tint" id="healerContent"></div>
+    </div>
+
+    <!-- Affirmation -->
+    <div class="affirmation" id="affirmationBlock">
+      <p id="affirmationText"></p>
+    </div>
+
+    <!-- HTTYD Upsell -->
+    <div class="report-section">
+      <div class="report-card blush-tint" style="text-align:center;">
+        <p style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold-light);margin-bottom:12px;font-style:italic;">12 signs repeat the loop. 13 closes it.</p>
+        <p style="font-size:0.88rem;line-height:1.8;margin-bottom:0;"><em>How To Train Your Dragon</em> is six weeks of working with all 13 signs and all 13 moons — cycle after cycle — until the nervous system learns to hold the signal that the 12-sign system edited out. Your true placement. The full lunar cycle. The 13th frequency. Real life change, not more insight.</p>
+      </div>
+    </div>
+
+    <!-- Section 5: Ophiuchus in Your Chart -->
+    <div class="report-section" id="ophiuchusSection">
+      <div class="section-header">
+        <span class="section-icon">⛎</span>
+        <h3 class="section-title">Ophiuchus in Your Chart</h3>
+        <div class="section-accent"></div>
+      </div>
+      <div class="report-card" style="border-color:rgba(201,169,110,0.25);" id="ophiuchusContent"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="report-actions">
+
+      <button class="btn-download" onclick="downloadReport()">⬇ &nbsp; Download My Reading</button>
+      <br>
+      <button class="btn-new" onclick="startOver()">Begin a new reading</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>Lunar Sanctuary &nbsp;✦&nbsp; <span>AsOne.Earth</span></p>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2/astronomy.browser.min.js"></script>
+<script>
+// ── TRUE IAU 13-SIGN BOUNDARIES ──
+const IAU_SIGNS = [
+  { name:'Aries',       start:  0, end: 24,  cusp: 2 },
+  { name:'Taurus',      start: 24, end: 62,  cusp: 2 },
+  { name:'Gemini',      start: 62, end: 89,  cusp: 2 },
+  { name:'Cancer',      start: 89, end:110,  cusp: 2 },
+  { name:'Leo',         start:110, end:145,  cusp: 2 },
+  { name:'Virgo',       start:145, end:189,  cusp: 2 },
+  { name:'Libra',       start:189, end:212,  cusp: 2 },
+  { name:'Scorpius',    start:212, end:219,  cusp: 2 },
+  { name:'Ophiuchus',   start:219, end:237,  cusp: 2 },
+  { name:'Sagittarius', start:237, end:271,  cusp: 2 },
+  { name:'Capricorn',   start:271, end:299,  cusp: 2 },
+  { name:'Aquarius',    start:299, end:323,  cusp: 2 },
+  { name:'Pisces',      start:323, end:360,  cusp: 2 },
+];
+
+// Converts raw ecliptic longitude to true sidereal by removing tropical offset
+// The tropical zodiac starts at the vernal equinox; the real sky is ~24.5° behind it
+// This is the current precession offset — NOT an ayanamsha, just raw sky position
+function tropicalToTrueSidereal(tropicalLon) {
+  // Current precession: vernal equinox has moved ~24.5° from 0° Aries in the real sky
+  const PRECESSION_OFFSET = 24.5;
+  return ((tropicalLon - PRECESSION_OFFSET) + 360) % 360;
+}
+
+// ── YIN/YANG & ELEMENT BY SIGN ──
+const SIGN_QUALITY = {
+  Aries:       { polarity: 'Yang', element: 'Fire',  quality: 'expansive and outward-moving. Conditions support action, initiation and forward momentum.' },
+  Taurus:      { polarity: 'Yin',  element: 'Earth', quality: 'grounding and receptive. Conditions support slowing down, landing in the body and sensory presence.' },
+  Gemini:      { polarity: 'Yang', element: 'Air',   quality: 'active and connective. Conditions support communication, curiosity and making connections between ideas.' },
+  Cancer:      { polarity: 'Yin',  element: 'Water', quality: 'inward and nourishing. Conditions support emotional tending, rest and attending to what feels tender.' },
+  Leo:         { polarity: 'Yang', element: 'Fire',  quality: 'radiant and expressive. Conditions support visibility, creativity and moving from the heart outward.' },
+  Virgo:       { polarity: 'Yin',  element: 'Earth', quality: 'discerning and integrative. Conditions support refining, organising and nervous system care.' },
+  Libra:       { polarity: 'Yang', element: 'Air',   quality: 'relational and clarifying. Conditions support decision-making, balance and honest exchange.' },
+  Scorpius:    { polarity: 'Yin',  element: 'Water', quality: 'deep and transformative. Conditions support releasing, going beneath the surface and private restoration.' },
+  Ophiuchus:   { polarity: 'Yin',  element: 'Water/Fire', quality: 'liminal and knowing. Conditions support trusting what you already carry rather than seeking more.' },
+  Sagittarius: { polarity: 'Yang', element: 'Fire',  quality: 'expansive and meaning-seeking. Conditions support movement, vision and following what feels alive.' },
+  Capricorn:   { polarity: 'Yin',  element: 'Earth', quality: 'consolidating and structural. Conditions support intentional rest, long-view thinking and building what lasts.' },
+  Aquarius:    { polarity: 'Yang', element: 'Air',   quality: 'innovative and future-oriented. Conditions support original thinking, community and coming back to the present moment.' },
+  Pisces:      { polarity: 'Yin',  element: 'Water', quality: 'oceanic and receptive. Conditions support integration, creative flow, and knowing where you end.' },
+};
+
+function lonToSign(lon) {
+  const trueLon = tropicalToTrueSidereal(lon);
+  for (const s of IAU_SIGNS) {
+    if (trueLon >= s.start && trueLon < s.end) {
+      const distFromStart = trueLon - s.start;
+      const distFromEnd   = s.end - trueLon;
+      const onCusp = distFromStart < s.cusp || distFromEnd < s.cusp;
+      // Also check adjacent sign for cusp
+      let cuspWith = null;
+      if (distFromStart < s.cusp) {
+        const prev = IAU_SIGNS[(IAU_SIGNS.indexOf(s) + IAU_SIGNS.length - 1) % IAU_SIGNS.length];
+        cuspWith = prev.name;
+      } else if (distFromEnd < s.cusp) {
+        const next = IAU_SIGNS[(IAU_SIGNS.indexOf(s) + 1) % IAU_SIGNS.length];
+        cuspWith = next.name;
+      }
+      return { name: s.name, lon: trueLon, onCusp, cuspWith };
+    }
+  }
+  return { name: 'Pisces', lon: trueLon, onCusp: false, cuspWith: null };
+}
+
+function getNextOphiuchusMoonDate() {
+  // Search forward from today to find when Moon next enters Ophiuchus (219-237°)
+  const now = new Date();
+  for (let i = 0; i <= 30; i++) {
+    const d = new Date(now.getTime() + i * 24 * 60 * 60 * 1000);
+    const sign = lonToSign(Astronomy.EclipticGeoMoon(d).lon);
+    if (sign.name === 'Ophiuchus') {
+      // Found it — now find the exact day it entered
+      if (i === 0) return 'today';
+      const options = { day: 'numeric', month: 'long' };
+      return d.toLocaleDateString('en-GB', options);
+    }
+  }
+  return 'this cycle';
+}
+
+function getSunSign(dob, birthTime, utcOffset) {
+  const timeStr = birthTime || '12:00';
+  const offset  = parseFloat(utcOffset) || 0;
+  const [hr, mn] = timeStr.split(':').map(Number);
+  const utcHour  = hr + mn / 60 - offset;
+  const [yr, mo, dy] = dob.split('-').map(Number);
+  const date = new Date(Date.UTC(yr, mo - 1, dy, Math.floor(utcHour), Math.round((utcHour % 1) * 60)));
+  const ecl  = Astronomy.SunPosition(date);
+  return lonToSign(ecl.elon);
+}
+
+function getMoonSign(dob, birthTime, utcOffset) {
+  const timeStr = birthTime || '12:00';
+  const offset  = parseFloat(utcOffset) || 0;
+  const [hr, mn] = timeStr.split(':').map(Number);
+  const utcHour  = hr + mn / 60 - offset;
+  const [yr, mo, dy] = dob.split('-').map(Number);
+  const date = new Date(Date.UTC(yr, mo - 1, dy, Math.floor(utcHour), Math.round((utcHour % 1) * 60)));
+  const ecl  = Astronomy.EclipticGeoMoon(date);
+  return lonToSign(ecl.lon);
+}
+
+function getCurrentMoonSign() {
+  const ecl = Astronomy.EclipticGeoMoon(new Date());
+  return lonToSign(ecl.lon);
+}
+
+function getCurrentMoonPhase() {
+  const now   = new Date();
+  const phase = Astronomy.MoonPhase(now); // 0-360°
+  if (phase < 6.29  || phase >= 353.7) return { name:'New Moon',        emoji:'🌑', energy:'Intentions & Beginnings' };
+  if (phase < 83.6)                    return { name:'Waxing Crescent',  emoji:'🌒', energy:'Building & Believing'    };
+  if (phase < 96.4)                    return { name:'First Quarter',    emoji:'🌓', energy:'Action & Courage'        };
+  if (phase < 173.6)                   return { name:'Waxing Gibbous',   emoji:'🌔', energy:'Refinement & Trust'      };
+  if (phase < 186.4)                   return { name:'Full Moon',        emoji:'🌕', energy:'Release & Illumination'  };
+  if (phase < 263.6)                   return { name:'Waning Gibbous',   emoji:'🌖', energy:'Gratitude & Sharing'     };
+  if (phase < 276.4)                   return { name:'Last Quarter',     emoji:'🌗', energy:'Surrender & Letting Go'  };
+  return                                      { name:'Waning Crescent',  emoji:'🌘', energy:'Rest & Reflection'       };
+}
+
+function calcJD(dob, birthTime, utcOffset) {
+  const timeStr = birthTime || '12:00';
+  const offset  = parseFloat(utcOffset) || 0;
+  const [hr, mn] = timeStr.split(':').map(Number);
+  const utcHour  = hr + mn / 60 - offset;
+  const [yr, mo, dy] = dob.split('-').map(Number);
+  let year = yr, month = mo;
+  if (month <= 2) { year--; month += 12; }
+  const A = Math.floor(year / 100);
+  const B = 2 - A + Math.floor(A / 4);
+  return Math.floor(365.25*(year+4716)) + Math.floor(30.6001*(month+1)) + dy + utcHour/24 + B - 1524.5;
+}
+
+function getAscendant(dob, birthTime, utcOffset, lat, lon) {
+  if (lat === null || lat === undefined || lon === null || lon === undefined || !birthTime) return null;
+  const jd   = calcJD(dob, birthTime, utcOffset);
+  const T    = (jd - 2451545.0) / 36525;
+  const GMST = ((280.46061837 + 360.98564736629*(jd-2451545.0) + 0.000387933*T*T) % 360 + 360) % 360;
+  const RAMC = (GMST + lon) * Math.PI / 180;
+  const e    = (23.4392911 - 0.013004167*T) * Math.PI / 180;
+  const phi  = lat * Math.PI / 180;
+  const asc  = ((Math.atan2(Math.cos(RAMC), -(Math.sin(RAMC)*Math.cos(e)+Math.tan(phi)*Math.sin(e)))) * 180/Math.PI + 360) % 360;
+  return lonToSign(asc);
+}
+
+function getMidheaven(dob, birthTime, utcOffset, lon) {
+  if (!birthTime || lon === null || lon === undefined) return null;
+  const jd   = calcJD(dob, birthTime, utcOffset);
+  const T    = (jd - 2451545.0) / 36525;
+  const GMST = ((280.46061837 + 360.98564736629*(jd-2451545.0) + 0.000387933*T*T) % 360 + 360) % 360;
+  const RAMC = (GMST + lon) * Math.PI / 180;
+  const e    = (23.4392911 - 0.013004167*T) * Math.PI / 180;
+  const mc   = ((Math.atan2(Math.sin(RAMC), Math.cos(RAMC)*Math.cos(e))) * 180/Math.PI + 360) % 360;
+  return lonToSign(mc);
+}
+
+const signData = {
+  Aries:       { element: 'Fire',  ruling: 'Mars',    glyph: '♈', selfCare: 'movement before deliberation', restore: 'Your placement is wired for action over analysis. The gap between impulse and doing is where the signal gets lost for you. Not through force. Through noticing what is already ready to move and getting out of its way.' },
+  Taurus:      { element: 'Earth', ruling: 'Venus',   glyph: '♉', selfCare: 'landing before loading', restore: 'Your nervous system is the most signal-sensitive of all the placements. It needs to arrive somewhere fully before it can receive anything. The static for you is noise, rush and overstimulation. The signal comes through stillness, sensation, the body fully present.' },
+  Gemini:      { element: 'Air',   ruling: 'Mercury', glyph: '♊', selfCare: 'presence before narration', restore: 'You can articulate the pattern with extraordinary precision. The static for you is the narration itself — the endless commentary that processes experience instead of having it. The signal is in the pause. What becomes available when the analysis stops.' },
+  Cancer:      { element: 'Water', ruling: 'Moon',    glyph: '♋', selfCare: 'your signal before everyone else\'s', restore: 'You receive other people\'s frequency before they\'ve even spoken. That is not a flaw. It is a feature running without boundaries. The static is everyone else\'s signal drowning out your own. The reading is always your interior first.' },
+  Leo:         { element: 'Fire',  ruling: 'Sun',     glyph: '♌', selfCare: 'signal without an audience', restore: 'Your placement is built to radiate. The static is performance — giving the signal outward before you\'ve received it yourself. What becomes available when you create, express, move, with no one watching and nothing required of you.' },
+  Virgo:       { element: 'Earth', ruling: 'Mercury', glyph: '♍', selfCare: 'regulation before optimisation', restore: 'You understand the pattern completely. The static is the gap between understanding it and the body actually releasing it. That gap is not a thinking problem. It is a nervous system problem. The signal comes through when the body feels safe enough to stop bracing.' },
+  Libra:       { element: 'Air',   ruling: 'Venus',   glyph: '♎', selfCare: 'decision before negotiation', restore: 'Your nervous system runs constant calibration. Weighing, adjusting, sensing the room. The static is the endless weighing. The signal is the moment you make a decision for yourself, without reference to anyone else\'s frequency, and let it stand.' },
+  Scorpius:    { element: 'Water', ruling: 'Pluto',   glyph: '♏', selfCare: 'release before more depth', restore: 'You carry more signal than almost any other placement. The static is accumulation — absorbing, holding, processing, never putting down. The reading is not more depth work. It is conscious release. What you set down creates more space for the signal than anything you could excavate.' },
+  Ophiuchus:   { element: 'Water/Fire', ruling: 'Chiron', glyph: '⛎', selfCare: 'embodying what you already know', restore: 'You carry the oldest signal. You have always known things others are still learning. The static is the waiting — for enough healing, enough permission, enough proof that you are ready. The signal has been live the whole time. The reading is to stop waiting and start living from what you already receive.' },
+  Sagittarius: { element: 'Fire',  ruling: 'Jupiter', glyph: '♐', selfCare: 'completion before another beginning', restore: 'Your placement is oriented toward the horizon. The static is perpetual beginning — always moving toward the next thing before this one has finished transmitting. The signal is in completion. Something is closer to done than it looks.' },
+  Capricorn:   { element: 'Earth', ruling: 'Saturn',  glyph: '♑', selfCare: 'rest as signal not reward', restore: 'Your nervous system learned to treat rest as something earned. The static is the constant output that prevents the system from ever receiving. Rest is not recovery from the work. It is how the nervous system learns it is finally safe enough to tune in.' },
+  Aquarius:    { element: 'Air',   ruling: 'Uranus',  glyph: '♒', selfCare: 'presence before vision', restore: 'You receive signal at altitude — future-oriented, collective, wide. The static is the distance from the body that altitude creates. The reading is to come down into the present moment, this week, this body, where the signal actually needs to be lived.' },
+  Pisces:      { element: 'Water', ruling: 'Neptune', glyph: '♓', selfCare: 'your frequency before everyone else\'s', restore: 'You are the most porous of all the placements. You receive everything. The static is the absence of a container — your frequency merging with everyone else\'s until you cannot locate yourself. The reading is always the same: know where you end.' }
+};
+
+const moonData = {
+  Aries:       'Your inner world moves fast and discharges quickly. When the interface is dysregulated you loop in your head rather than moving. Physical action does more for your signal than any amount of processing.',
+  Taurus:      'Your interface needs safety before it opens. Disruption and unpredictability create static at a cellular level. Ritual, consistency and sensory presence are not indulgences. They are how your system learns to receive.',
+  Gemini:      'Your inner world narrates everything with speed and precision. The interface heals when the narration pauses. Understanding a feeling and actually having it are different frequencies.',
+  Cancer:      'Your inner world receives everything. You feel shifts in others before they are aware of them. That sensitivity has a cost. Your interface needs your own signal tended to before anyone else\'s.',
+  Leo:         'Your inner world wants to be received, not performed. The static builds when so much signal moves outward that nothing remains for the interior. Being witnessed is a different thing from being useful.',
+  Virgo:       'Your inner world processes through analysis. The loop — where understanding the pattern does not shift it — is a nervous system pattern not a thinking problem. The interface needs safety to release the bracing, not more insight.',
+  Libra:       'Your inner world runs constant calibration. That work is exhausting and invisible. The interface settles in moments of clear uncontested decision, especially ones made entirely for yourself.',
+  Scorpio:     'Your inner world is vast and largely private. You carry more signal than you show. The interface can learn to put things down as well as hold them. Not everything held needs to be processed first.',
+  Ophiuchus:   'Your inner world holds two frequencies at once — the ordinary and the beneath-it. That is not a problem to resolve. It is the gift. Your interface heals when it trusts what it receives rather than manages it.',
+  Sagittarius: 'Your inner world needs meaning as much as movement. When the signal feels cut off it is often because the point is not yet visible. Your interface responds to hope that is specific and embodied, not abstract.',
+  Capricorn:   'Your inner world cloaks signal in productivity. Feeling waits until the list is done, which means it rarely comes. The interface is asking for receiving before fixing. That is not weakness. That is the work.',
+  Aquarius:    'Your inner world operates at altitude. Brilliant, future-oriented, sometimes at a remove from the body. The interface heals when you come back into the physical — breath, sensation, this moment.',
+  Pisces:      'Your inner world is oceanic and without natural walls. You receive the frequency of every room you enter. The interface needs containers — clear endings, defined edges, knowing where you stop.'
+};
+
+const moonPhaseRestore = {
+  'New Moon':        'The signal is being reset. This is the moment before — not the moment of. What is available here is not action but orientation. Something is transmitting that does not need to be visible yet to be real.',
+  'Waxing Crescent': 'Something has started transmitting. The interface wants evidence before it commits. The reading is to keep receiving before the proof arrives.',
+  'First Quarter':   'There is friction in this phase. Not because the signal is wrong. Because the interface is genuinely reorganising around a different frequency. The reading is to stay in the middle of that rather than resolve it prematurely.',
+  'Waxing Gibbous':  'The signal is almost at full strength. This is where the threshold addiction pattern activates — pulling back at the exact moment it starts working. Notice that and keep going.',
+  'Full Moon':       'Everything is visible. The signal is at full volume, including what has been quietly carried. This phase does not ask for more input. It asks what can be set down.',
+  'Waning Gibbous':  'The peak has moved through. What remains is what was actually real. The interface is integrating not acquiring. Let what was just transmitted land in the body.',
+  'Last Quarter':    'Something is completing its transmission. The reading is not a new signal. It is finishing what is already in motion.',
+  'Waning Crescent': 'The signal is quieting before the reset. This is genuine rest — the interface consolidating before the next cycle begins. What becomes clear in the quiet is often what matters most.'
+};
+
+const pillars = [
+  { icon: '🌊', name: 'Body',        key: 'body'      },
+  { icon: '🌙', name: 'Alignment',   key: 'emotional' },
+  { icon: '🌿', name: 'Signal',      key: 'spiritual' },
+  { icon: '✨', name: 'Static',      key: 'energy'    }
+];
+
+const pillarsBySign = {
+  Aries:       { body: 'The body knows before the mind catches up. Movement clears the static faster than thinking about it.', emotional: 'Discharge before processing. Shake, walk, sprint. See what the signal is once the static has moved.', spiritual: 'Something has been circling. The signal is available for one concrete move if the interface is ready.', energy: 'The impulse that keeps getting overridden is signal. It is worth asking what keeps blocking it.' },
+  Taurus:      { body: 'Slow, sensory, unhurried. Bath, earth, silence. Not as reward. As the actual condition the interface needs to receive.', emotional: 'The interface stabilises through repetition. One consistent practice does more than ten new ones.', spiritual: 'The signal is not in more acquisition. It is in one thing already known, actually lived.', energy: 'Restoration is not laziness. It is how the interface builds capacity to hold a stronger signal.' },
+  Gemini:      { body: 'Movement that relocates from head to limbs. Not to stop the thinking. To think from somewhere with less static.', emotional: 'Writing to discover rather than document. There is signal in what only becomes visible in the doing of it.', spiritual: 'One insight from recent weeks is ready to move from understanding into something lived. Just one.', energy: 'Silence is not empty. There is signal in it that noise covers.' },
+  Cancer:      { body: 'Water in any form. It is not coincidence that this placement and this element are the same.', emotional: 'Your own interior has a frequency that needs attending before anyone else\'s. Non-negotiable.', spiritual: 'A boundary held without explanation is signal. It does not require justification to be real.', energy: 'The interface moves in tides. Ebb is not failure. It is part of the transmission.' },
+  Leo:         { body: 'Expressive movement — dance, stretch, anything that feels like yourself rather than exercise.', emotional: 'Creating with no audience in mind is a different frequency than performing. Something opens in that privacy.', spiritual: 'What would transmit from you if nothing was required of you? That is the signal worth attending to.', energy: 'Receiving without deflecting is available as a practice. It is harder than it sounds for this placement.' },
+  Virgo:       { body: 'Regulation before the list. Breath, cold water, a slow walk. The list will still be there.', emotional: 'Self-compassion applied to one specific thing. Not as a general aspiration. As a direct practice.', spiritual: 'Imperfect transmission beats perfect preparation. The signal does not wait for readiness.', energy: 'Rest without earning it. Once. The interface learns safety through the experience of stopping.' },
+  Libra:       { body: 'Calm, beautiful environments. Your interface reads the frequency of every room. Create a room worth reading.', emotional: 'Naming what is actually out of alignment before attempting to fix it. Signal before solution.', spiritual: 'A decision made for yourself, without reference to anyone else\'s frequency. Available now.', energy: 'A boundary is not a rejection. It is the interface maintaining its own signal.' },
+  Scorpius:    { body: 'Deep rest, water, privacy. The body processes significant signal in the dark without your management.', emotional: 'Setting something down is different from processing it. Conscious release creates more space than further excavation.', spiritual: 'Something being carried that was never part of your original frequency. Worth naming.', energy: 'Energetic cleansing is not metaphorical for this placement. Salt, sound and sleep all work.' },
+  Ophiuchus:   { body: 'Grounding the signal in the body. Breath, earth, slow movement. The body often carries what the mind is still working out.', emotional: 'The waiting for enough healing before moving is itself the static. The signal has been live longer than the waiting suggests.', spiritual: 'The gap between who you know yourself to be and how that is lived does not need to close all at once. One degree today.', energy: 'Between is not broken. It is a location with its own frequency.' },
+  Sagittarius: { body: 'Outside, moving, under open sky. This interface does not maintain signal well in small enclosed spaces for extended periods.', emotional: 'Meaning unlocks momentum for this placement. Where is the meaning in what is currently transmitting?', spiritual: 'Something already started is closer to completion than it appears. The signal supports finishing.', energy: 'Another beginning is always available. Completion is the rarer frequency.' },
+  Capricorn:   { body: 'Intentional rest treated as the priority transmission, not recovery from everything else.', emotional: 'Not being fine is available as a temporary state, with someone safe. The signal does not always need to be managed.', spiritual: 'What is being built for yourself, separate from what is being built for others? That frequency matters.', energy: 'The interface learns it is safe through the experience of stopping. Rest is signal, not silence.' },
+  Aquarius:    { body: 'Somatic practices — breathwork, body scanning — that return signal from altitude to the body.', emotional: 'The present moment contains signal the long view makes harder to receive. Come down.', spiritual: 'Something already known that keeps not being lived. The static is worth examining here.', energy: 'The disconnection from the body is the static, not the uniqueness. The body is where signal lands.' },
+  Pisces:      { body: 'Water, sleep, gentle movement. The body processes signal while you rest. It does not always need direction.', emotional: 'A container with a clear ending. Not to limit the depth. To know where your frequency stops.', spiritual: 'A boundary without explanation is available. It is signal, not rejection.', energy: 'You do not have to receive everything that is broadcasting. Staying in your own frequency is a practice.' }
+};
+
+const alchemical = {
+  Aries:       { process: 'Purification, Calcination',          element: 'Fire'         },
+  Taurus:      { process: 'Congelation, Transformation',        element: 'Earth'        },
+  Gemini:      { process: 'Fixation, Synthesis',                element: 'Air'          },
+  Cancer:      { process: 'Dissolution, Dismantling',           element: 'Water'        },
+  Leo:         { process: 'Digestion, Conversion',              element: 'Fire'         },
+  Virgo:       { process: 'Distillation, Purity',               element: 'Earth'        },
+  Libra:       { process: 'Sublimation, Transmutation',         element: 'Air'          },
+  Scorpius:    { process: 'Separation, Stillness',              element: 'Water'        },
+  Ophiuchus:   { process: 'Unification, Wound Healing',         element: 'Water/Aether' },
+  Sagittarius: { process: 'Incineration, Resurrection',         element: 'Fire'         },
+  Capricorn:   { process: 'Fermentation, Illumination',         element: 'Earth'        },
+  Aquarius:    { process: 'Multiplication, Virtues',            element: 'Air'          },
+  Pisces:      { process: 'Ascension, Perfection, Christos-Sophia', element: 'Water/Aether' }
+};
+
+const affirmations = {
+  Taurus:      'My body knows the frequency. I am learning to trust it.',
+  Gemini:      'The signal is not in more words. It is in the space between them.',
+  Cancer:      'I am not the feelings I absorb. I am the one who notices them.',
+  Leo:         'My light is not a performance. It is a signal. I let it transmit.',
+  Virgo:       'The static is not me. The signal underneath it always was.',
+  Libra:       'I do not negotiate my sovereignty. It is not up for discussion.',
+  Scorpius:    'What I have been carrying was never the signal. I put it down.',
+  Ophiuchus:   'I was never separate from what I know. I am done pretending otherwise.',
+  Sagittarius: 'I am not looking for the signal. I am it. I move from there.',
+  Capricorn:   'Rest is not absence of signal. It is how the signal gets stronger.',
+  Aquarius:    'The signal does not live in the altitude. It lives in the body.',
+  Pisces:      'I know where I end. That is not a limitation. That is sovereignty.'
+};
+
+// ── APP LOGIC ──
+
+let userData = {};
+
+const loadingMessages = [
+  'Locating your true sky placement',
+  'Reading the actual sky',
+  'Calculating the current moon signal',
+  'Building your reading',
+  'Almost ready'
+];
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+async function generateReading() {
+  const name       = document.getElementById('name').value.trim();
+  const email      = document.getElementById('email').value.trim();
+  const dob        = document.getElementById('dob').value;
+  const birthPlace = document.getElementById('birthPlace').value.trim();
+  const error      = document.getElementById('errorMsg');
+
+  if (!name || !email || !dob || !birthPlace) {
+    error.textContent = 'Please fill in all required fields.';
+    error.style.display = 'block';
+    return;
+  }
+
+  // Check for partially filled birth time
+  const _h = document.getElementById('birthHour').value;
+  const _m = document.getElementById('birthMinute').value;
+  const _ap = document.getElementById('birthAmPm').value;
+  const timeParts = [_h, _m, _ap].filter(v => v !== '');
+  if (timeParts.length > 0 && timeParts.length < 3) {
+    error.textContent = 'Please complete your birth time (hour, minute and AM/PM) or leave all three blank.';
+    error.style.display = 'block';
+    return;
+  }
+
+  error.style.display = 'none';
+
+  userData = {
+    name, email, dob,
+    birthTime: (function() {
+      const h = document.getElementById('birthHour').value;
+      const m = document.getElementById('birthMinute').value;
+      const ap = document.getElementById('birthAmPm').value;
+      if (!h || !m || !ap) return '';
+      let hr = parseInt(h);
+      if (ap === 'AM' && hr === 12) hr = 0;
+      if (ap === 'PM' && hr !== 12) hr += 12;
+      return String(hr).padStart(2,'0') + ':' + m;
+    })(),
+    utcOffset: 0,
+    birthPlace,
+    lat: null, lon: null
+  };
+
+  showPage('loadingPage');
+
+  // Geocode birth place via OpenStreetMap Nominatim + auto timezone
+  try {
+    const q   = encodeURIComponent(birthPlace);
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${q}&format=json&limit=1`, {
+      headers: { 'Accept-Language': 'en', 'User-Agent': 'LunarSanctuaryApp/1.0' }
+    });
+    const data = await res.json();
+    if (data && data[0]) {
+      userData.lat = parseFloat(data[0].lat);
+      userData.lon = parseFloat(data[0].lon);
+      console.log('Geocoded:', userData.lat, userData.lon);
+
+      // Auto-detect UTC offset from coordinates and birth date/time using TimeZoneDB
+      if (userData.birthTime) {
+        try {
+          const birthDate = new Date(userData.dob + 'T' + (userData.birthTime || '12:00') + ':00');
+          const timestamp = Math.floor(birthDate.getTime() / 1000);
+          const tzRes = await fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=NUJIEEV1OL3D&format=json&by=position&lat=${userData.lat}&lng=${userData.lon}&time=${timestamp}`);
+          const tzData = await tzRes.json();
+          if (tzData && tzData.gmtOffset !== undefined) {
+            userData.utcOffset = tzData.gmtOffset / 3600;
+            console.log('Timezone UTC offset:', userData.utcOffset);
+          }
+        } catch(tzErr) {
+          console.log('Timezone lookup failed, using UTC+0:', tzErr);
+        }
+      }
+
+      runLoadingSequence();
+    } else {
+      console.log('Geocoding returned no results for:', birthPlace);
+      useFallbackCoords();
+    }
+  } catch(e) {
+    console.log('Geocoding failed:', e);
+    useFallbackCoords();
+  }
+}
+
+function useFallbackCoords() {
+  const manualLat = parseFloat(document.getElementById('manualLat').value);
+  const manualLon = parseFloat(document.getElementById('manualLon').value);
+  if (!isNaN(manualLat) && !isNaN(manualLon)) {
+    userData.lat = manualLat;
+    userData.lon = manualLon;
+    runLoadingSequence();
+  } else {
+    // Go back to form, show manual input fields
+    showPage('formPage');
+    document.getElementById('latlonRow').style.display = 'grid';
+    document.getElementById('geocodeNote').style.display = 'block';
+  }
+}
+
+function runLoadingSequence() {
+  const msgEl = document.getElementById('loadingMsg');
+  const fill  = document.getElementById('progressFill');
+  let i = 0;
+  const steps = loadingMessages.length;
+  const interval = setInterval(() => {
+    if (i < steps) {
+      msgEl.style.opacity = '0';
+      setTimeout(() => { msgEl.textContent = loadingMessages[i]; msgEl.style.opacity = '1'; }, 300);
+      fill.style.width = ((i + 1) / steps * 100) + '%';
+      i++;
+    } else {
+      clearInterval(interval);
+      setTimeout(() => buildAndShowReport(), 500);
+    }
+  }, 900);
+}
+
+function buildAndShowReport() {
+  const sunResult  = getSunSign(userData.dob, userData.birthTime, userData.utcOffset);
+  const moonResult = getMoonSign(userData.dob, userData.birthTime, userData.utcOffset);
+  const ascResult  = getAscendant(userData.dob, userData.birthTime, userData.utcOffset, userData.lat, userData.lon);
+  const currentMoonResult = getCurrentMoonSign();
+  const sunSign    = sunResult.name;
+  const moonSign   = moonResult.name;
+  const ascSign    = ascResult ? ascResult.name : null;
+  const currentMoonSign = currentMoonResult.name;
+  const currentMoon = getCurrentMoonPhase();
+  const data        = signData[sunSign];
+  const moonSignInfo = moonData[moonSign];
+  const pillarData  = pillarsBySign[sunSign];
+
+  // Cusp caveats
+  const cuspNote = sunResult.onCusp
+    ? `<p class="cusp-note">Your Sun is within 2° of the boundary between <strong>${sunSign}</strong> and <strong>${sunResult.cuspWith}</strong>. Both placements may feel relevant to you. This reading is built around ${sunSign} as the primary placement.</p>`
+    : '';
+  const moonCuspNote = moonResult.onCusp
+    ? `<p class="cusp-note">Your natal Moon is close to the boundary between <strong>${moonSign}</strong> and <strong>${moonResult.cuspWith}</strong>. Both may feel true.</p>`
+    : '';
+
+  // Header
+  document.getElementById('reportName').textContent = userData.name;
+  const sunAlchData  = alchemical[sunSign]  || {};
+  const moonAlchData = alchemical[moonSign] || {};
+  const ascAlchData  = ascSign ? (alchemical[ascSign] || {}) : {};
+
+  document.getElementById('chartMeta').innerHTML = `
+    <span><div class="dot"></div> ${data.glyph} ${sunSign} Sun${sunResult.onCusp ? ' ⚠' : ''} <em style="font-size:0.72rem;color:var(--gold);opacity:0.8;">${sunAlchData.process || ''}</em></span>
+    <span><div class="dot"></div> ☽ ${moonSign} Moon${moonResult.onCusp ? ' ⚠' : ''} <em style="font-size:0.72rem;color:var(--gold);opacity:0.8;">${moonAlchData.process || ''}</em></span>
+    ${ascSign ? `<span><div class="dot"></div> ↑ ${ascSign} Rising <em style="font-size:0.72rem;color:var(--gold);opacity:0.8;">${ascAlchData.process || ''}</em></span>` : `<span><div class="dot" style="background:var(--text-soft);"></div> <em style="font-size:0.72rem;color:var(--text-soft);">Rising not calculated (birth time needed)</em></span>`}
+    <span><div class="dot"></div> Moon now in ${currentMoonSign}</span>
+  `;
+
+  // Baseline one-liners per sign — alchemical process woven in subtly
+  const sunOneLiner = {
+    Aries:       'Your signal is direct, immediate, built for movement. The purification process is active here — what is ready to be burned away so the frequency can move clean.',
+    Taurus:      'Your signal is sensory, grounded, built for depth. Congelation is the process — the slow setting of what is becoming solid and real in your life.',
+    Gemini:      'Your signal is fast, articulate, built for connection. Fixation is available — the moment when the ideas that have been circling start to land in the body.',
+    Cancer:      'Your signal is receptive, attuned, built for care. Dissolution is the process — what has been held too tightly is ready to soften and release.',
+    Leo:         'Your signal is radiant, expressive, built to be received. Digestion is the process — converting what you take in into something that transmits outward.',
+    Virgo:       'Your signal is precise, discerning, built for refinement. Distillation is active — what remains when everything unnecessary has been removed.',
+    Libra:       'Your signal is relational, calibrating, built for harmony. Sublimation is the process — something is lifting from one form into another.',
+    Scorpius:    'Your signal is deep, transformative, built to go beneath the surface. Separation is the process — what belongs to you and what does not is becoming clearer.',
+    Ophiuchus:   'Your signal is the oldest one. The 13th. Unification is the process — the wound that was always a doorway is becoming visible as such.',
+    Sagittarius: 'Your signal is expansive, meaning-seeking, built for the horizon. Incineration is the process — something must end completely before what is next can emerge.',
+    Capricorn:   'Your signal is structured, purposeful, built to endure. Fermentation is active — the breakdown that precedes illumination.',
+    Aquarius:    'Your signal is visionary, collective, built for altitude. Multiplication is the process — what you carry has the capacity to expand beyond yourself.',
+    Pisces:      'Your signal is oceanic, porous, built to dissolve boundaries. Ascension is the process — the Christos-Sophia frequency, rising through what has been dissolved.'
+  };
+
+  const moonOneLiner = {
+    Aries:       'Your interface moves fast and needs to discharge before it can receive. Physical movement does more for your regulation than any amount of processing.',
+    Taurus:      'Your interface needs safety before it opens. Ritual, consistency and sensory presence are how it learns to receive.',
+    Gemini:      'Your interface narrates everything. Understanding a feeling and actually having it are different frequencies.',
+    Cancer:      'Your interface absorbs everyone else\'s signal before your own. Your interior needs tending first.',
+    Leo:         'Your interface wants to be witnessed, not performed. It restores when signal moves inward rather than always outward.',
+    Virgo:       'Your interface processes through analysis. The loop where understanding does not shift the body is a nervous system pattern, not a thinking problem.',
+    Libra:       'Your interface runs constant calibration. It settles in moments of clear, uncontested decision made entirely for yourself.',
+    Scorpius:    'Your interface is vast and private. It can hold things and it can also learn to put them down.',
+    Ophiuchus:   'Your interface holds two frequencies at once — the ordinary and the beneath-it. It heals when it trusts what it receives rather than manages it.',
+    Sagittarius: 'Your interface needs meaning as much as movement. It responds to hope that is specific and embodied, not abstract.',
+    Capricorn:   'Your interface cloaks signal in productivity. It is asking for receiving before fixing.',
+    Aquarius:    'Your interface operates at altitude. It heals when it comes back into the physical — breath, sensation, this moment.',
+    Pisces:      'Your interface is oceanic and without natural walls. It needs containers — clear endings, defined edges, knowing where you stop.'
+  };
+
+  const ascOneLiner = {
+    Aries:       'You meet the world with directness and momentum. The frequency you transmit before you speak is one of readiness.',
+    Taurus:      'You meet the world with steadiness and presence. The frequency you transmit is one of groundedness and quiet authority.',
+    Gemini:      'You meet the world with curiosity and agility. The frequency you transmit is one of connection and quick intelligence.',
+    Cancer:      'You meet the world with sensitivity and attunement. The frequency you transmit is one of care and deep receptivity.',
+    Leo:         'You meet the world with warmth and presence. The frequency you transmit is one of generosity and radiance.',
+    Virgo:       'You meet the world with discernment and precision. The frequency you transmit is one of careful attention and refinement.',
+    Libra:       'You meet the world with grace and calibration. The frequency you transmit is one of harmony and considered response.',
+    Scorpius:    'You meet the world with depth and intensity. The frequency you transmit is one of transformation and unflinching perception.',
+    Ophiuchus:   'You meet the world through the 13th frequency — the one that closes the loop rather than repeating it. The signal you carry before you speak is ancient, liminal, and outside the frame of the 12-sign system entirely.',
+    Sagittarius: 'You meet the world with expansiveness and vision. The frequency you transmit is one of possibility and forward momentum.',
+    Capricorn:   'You meet the world with purpose and structure. The frequency you transmit is one of quiet competence and long vision.',
+    Aquarius:    'You meet the world with originality and altitude. The frequency you transmit is one of future-orientation and collective thinking.',
+    Pisces:      'You meet the world with openness and porosity. The frequency you transmit is one of deep feeling and fluid receptivity.'
+  };
+
+  const ascText = ascSign
+    ? `<div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.07);">
+        <p style="margin-bottom:6px;"><strong>↑ ${ascSign} Rising</strong>${ascResult && ascResult.onCusp ? ' ⚠' : ''}</p>
+        <p style="font-size:0.88rem;color:var(--text-dim);line-height:1.7;">${ascOneLiner[ascSign] || ''}</p>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:8px;line-height:1.6;">Each month as the Moon moves through ${ascSign}, it illuminates how you meet the world and what frequency you transmit into each new cycle.</p>
+       </div>`
+    : '';
+
+  // Section 1: Baseline
+  const sunAlch  = sunAlchData;
+  const moonAlch = moonAlchData;
+  const ascAlch  = ascAlchData;
+
+  document.getElementById('soulContent').innerHTML = `
+    ${cuspNote}
+    <div style="margin-bottom:20px;">
+      <p style="margin-bottom:4px;"><strong>${data.glyph} ${sunSign} Sun</strong>${sunResult.onCusp ? ' ⚠' : ''}</p>
+      <p style="font-size:0.78rem;color:var(--gold);letter-spacing:0.5px;margin-bottom:8px;font-style:italic;">${sunAlch.process || ''} — ${sunAlch.element || ''}</p>
+      <p style="font-size:0.88rem;color:var(--text-dim);line-height:1.7;">${sunOneLiner[sunSign] || ''}</p>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-top:8px;line-height:1.6;">Each month as the Moon moves through ${sunSign}, it illuminates this part of you directly — what gets activated, what becomes available, what this cycle is asking you to work with.</p>
+    </div>
+    <div style="padding-top:20px;border-top:1px solid rgba(255,255,255,0.07);margin-bottom:20px;">
+      <p style="margin-bottom:4px;"><strong>☽ ${moonSign} Moon</strong>${moonResult.onCusp ? ' ⚠' : ''}</p>
+      <p style="font-size:0.78rem;color:var(--gold);letter-spacing:0.5px;margin-bottom:8px;font-style:italic;">${moonAlch.process || ''} — ${moonAlch.element || ''}</p>
+      <p style="font-size:0.88rem;color:var(--text-dim);line-height:1.7;">${moonOneLiner[moonSign] || ''}</p>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-top:8px;line-height:1.6;">Your Moon sign shows how your nervous system is wired to receive — the specific way it opens, blocks and processes the signal throughout each lunar cycle.</p>
+    </div>
+    ${ascSign ? `<div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.07);">
+        <p style="margin-bottom:4px;"><strong>↑ ${ascSign} Rising</strong>${ascResult && ascResult.onCusp ? ' ⚠' : ''}</p>
+        <p style="font-size:0.78rem;color:var(--gold);letter-spacing:0.5px;margin-bottom:8px;font-style:italic;">${ascAlch.process || ''} — ${ascAlch.element || ''}</p>
+        <p style="font-size:0.88rem;color:var(--text-dim);line-height:1.7;">${ascOneLiner[ascSign] || ''}</p>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-top:8px;line-height:1.6;">Each month as the Moon moves through ${ascSign}, it illuminates how you meet the world and what frequency you transmit into each new cycle.</p>
+       </div>` : `<div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.07);">
+        <p style="margin-bottom:4px;"><strong>↑ Rising Sign</strong></p>
+        <p style="font-size:0.85rem;color:var(--text-soft);line-height:1.7;font-style:italic;">Your Ascendant (rising sign) could not be calculated because no birth time was provided. If you know your birth time, start a new reading to include it.</p>
+       </div>`}
+    <p style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.07);font-style:italic;font-size:0.88rem;color:var(--text-dim);line-height:1.7;">${ascSign ? 'These three are your baseline.' : 'Your Sun and Moon are your baseline.'} The Moon moving through all 13 signs each month illuminates each one in turn. That is what this reading tracks.</p>
+    ${moonCuspNote}
+  `;
+
+  // Section 2: Moon signal
+  const moonQuality = SIGN_QUALITY[currentMoonSign] || {};
+  document.getElementById('moonPhaseDisplay').innerHTML = `
+    <div class="moon-visual">${currentMoon.emoji}</div>
+    <div class="moon-phase-info">
+      <h3>${currentMoon.name}</h3>
+      <p>${currentMoon.energy} · Moon in ${currentMoonSign}</p>
+      <p style="font-size:0.78rem;margin-top:4px;color:var(--text-soft)">${moonQuality.polarity || ''} · ${moonQuality.element || ''}</p>
+    </div>
+  `;
+  document.getElementById('moonContent').innerHTML = `
+    <p>${moonPhaseRestore[currentMoon.name]}</p>
+    <p>The Moon is currently in <strong>${currentMoonSign}</strong>, a ${moonQuality.polarity} ${moonQuality.element} sign. Right now the signal is <em>${moonQuality.quality}</em></p>
+    ${moonCuspNote}
+    <div style="margin-top:24px;padding:16px 20px;border:1px solid rgba(201,169,110,0.3);border-radius:8px;text-align:center;background:rgba(201,169,110,0.05);">
+      <p style="font-family:'Playfair Display',serif;color:var(--gold-light);font-size:1.6rem;line-height:1.4;margin-bottom:8px;">The Moon moves into a new sign every 2-3 days.</p>
+      <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.7;margin-bottom:0;">This is the practice. <em>How To Train Your Dragon</em> is where you see the loop as it's happening.</p>
+    </div>
+  `;
+
+  // Update care section title dynamically
+  document.getElementById('careSectionTitle').textContent = `How to Receive What Lunar Offers Under a ${currentMoonSign} Moon`;
+
+  // Section 3: Reading
+  document.getElementById('careContent').innerHTML = `
+    <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.7;">Four areas of your life — body, alignment, signal and what blocks it — through the lens of your <strong>${sunSign}</strong> placement and the current <strong>${currentMoon.name}</strong> in <strong>${currentMoonSign}</strong>. Yours to work with however feels right.</p>
+  `;
+
+  const pillarsHtml = pillars.map(p => `
+    <div class="pillar">
+      <span class="pillar-icon">${p.icon}</span>
+      <div class="pillar-name">${p.name}</div>
+      <div class="pillar-text">${pillarData[p.key]}</div>
+    </div>
+  `).join('');
+  document.getElementById('carePillars').innerHTML = pillarsHtml;
+
+  // Section 4: The Loop
+  document.getElementById('healerContent').innerHTML = `
+    <p>You have done the work. Years of it. You understand your patterns with precision. And something still hasn't landed in real life yet.</p>
+    <p>That is not a failure of awareness. Awareness was never the problem.</p>
+    <p>The nervous system is an interface. Until it is regulated, it blocks the signal — not because something is wrong with you, but because that is what it was built to do. The construct that formed around your early experience tuned out a frequency that felt too big, too unsafe, too much to hold. Your system learned to manage it. That management became the pattern.</p>
+    <p>The ${sunSign} in you, the ${moonSign} Moon that shapes how your inner world receives — these are not broken. They are doing exactly what they were trained to do. The question is whether that training still serves you.</p>
+    <p>The moon is not a self-care tool. It is a rhythm. Work with it consistently and the nervous system starts to learn a different frequency. The signal gets clearer. Not through more insight. Through the body learning it is finally safe to receive what was always there.</p>
+    <p><strong>That is what sovereignty actually is. Not something acquired. Something restored.</strong></p>
+    <p><em>Understanding the loop is not the same as seeing it while it's happening.</em></p>
+  `;
+
+  // Section 5: Ophiuchus in Your Chart
+  const isSunOph     = sunSign === 'Ophiuchus';
+  const isMoonOph    = moonSign === 'Ophiuchus';
+  const isAscOph     = ascSign === 'Ophiuchus';
+  const isCurrentOph = currentMoonSign === 'Ophiuchus';
+  const isAdjacent   = ['Scorpius','Sagittarius'].includes(sunSign);
+  const nextOphDate  = getNextOphiuchusMoonDate();
+  const ophDateLine  = isCurrentOph
+    ? '<p><em>The Moon is in Ophiuchus right now.</em></p>'
+    : `<p><em>This cycle, the Moon moves through Ophiuchus on ${nextOphDate}.</em></p>`;
+
+  let ophiuchusHtml = '';
+
+  if (isSunOph) {
+    ophiuchusHtml = `
+      <p><strong>Your Sun is in Ophiuchus.</strong> You are the 13th. The one the system left out because it could not be contained in a calendar.</p>
+      <p>Ophiuchus is the union of masculine and feminine in the non-local identity — the self before the construct formed, before the loop began. It is not a wound to heal. It is a frequency to receive. The ancient healer, the serpent bearer, the one who stands between death and life and knows both without being consumed by either.</p>
+      <p>If you have always felt like you did not quite fit the sign you were given, now you know why. You were never in the 12. You were always the 13th. The one that closes the loop rather than repeating it.</p>
+      <p>Everything in this reading is filtered through that frequency. Your reading is not about doing more. It is about receiving what you already are.</p>
+      ${ophDateLine}
+    `;
+  } else if (isAscOph) {
+    ophiuchusHtml = `
+      <p><strong>Your Ascendant is in Ophiuchus.</strong> The 13th frequency is the lens through which you meet the world.</p>
+      <p>The Ascendant is the interface — how the nervous system presents itself, how you are received, and how you receive life in return. Ophiuchus rising means that interface has always carried the 13th signal, whether or not the world has had language for it.</p>
+      <p>You may have spent years trying to make yourself legible within the 12-sign frame. The signal was never the problem. The frame was too small.</p>
+      <p>This placement is the one the system most struggled to contain — because it lives at the threshold. Between Scorpius and Sagittarius. Between death and expansion. Between what was and what becomes. That is not a difficult place to stand. It is a sovereign one.</p>
+      ${ophDateLine}
+    `;
+  } else if (isMoonOph) {
+    ophiuchusHtml = `
+      <p><strong>Your natal Moon is in Ophiuchus.</strong> Your emotional interface runs on the 13th frequency.</p>
+      <p>This means your inner world has always received signal that most systems have no language for. The union of masculine and feminine, the space between the ordinary and the beneath-it — your nervous system knows this territory even if no one ever named it for you.</p>
+      <p>The challenge for an Ophiuchan Moon is that the interface has often been managed down rather than received. The signal is too wide, too deep, too outside the 12-sign frame. The reading is not to expand the receiving. It is to stop managing it.</p>
+      ${ophDateLine}
+    `;
+  } else if (isCurrentOph) {
+    ophiuchusHtml = `
+      <p><strong>The Moon is currently moving through Ophiuchus.</strong> The 13th frequency is available to everyone right now, regardless of natal placement.</p>
+      <p>This is the signal most systems edit out. The one that sits between Scorpius and Sagittarius — between transformation and expansion — and holds the tension of both without resolving into either. The union of masculine and feminine. The non-local self briefly legible in the sky.</p>
+      <p>Whatever your natal placement, the collective interface has access right now to the frequency that closes the loop rather than repeating it.</p>
+      ${ophDateLine}
+    `;
+  } else if (isAdjacent) {
+    ophiuchusHtml = `
+      <p><strong>Your Sun is in ${sunSign}, adjacent to Ophiuchus.</strong> You live next door to the 13th frequency.</p>
+      <p>${sunSign === 'Scorpius' ? 'Scorpius sits just before Ophiuchus in the real sky. You carry the depth, the transformation, the willingness to go into the dark — all of which are the preparation for what Ophiuchus holds. The threshold between your placement and the 13th is the thinnest of any in the zodiac.' : 'Sagittarius sits just after Ophiuchus in the real sky. You carry the expansion, the horizon, the movement toward meaning — all of which emerge on the other side of what Ophiuchus holds. You have already crossed through it, whether you knew it or not.'}</p>
+      <p>Working with the 13-sign system places you in accurate relationship with that frequency. It was always part of your sky. Now it is part of your map.</p>
+      ${ophDateLine}
+    `;
+  } else {
+    ophiuchusHtml = `
+      <p><strong>12 signs repeat the loop. 13 closes it.</strong></p>
+      <p>Ophiuchus is always there in the real sky, between Scorpius and Sagittarius. The Sun passes through it every year. The Moon passes through it every month. It was removed from the zodiac not because it was not real, but because it could not be contained in a calendar.</p>
+      <p>Your Sun and Moon do not fall in Ophiuchus — but this reading is built on a system that includes it. That matters. You are already working with the full sky.</p>
+      ${ophDateLine}
+    `;
+  }
+
+  document.getElementById('ophiuchusContent').innerHTML = ophiuchusHtml;
+  document.getElementById('affirmationText').textContent = affirmations[sunSign];
+
+  showPage('reportPage');
+  window.reportData = { userData, sunSign, moonSign, currentMoon };
+}
+
+function startOver() {
+  document.getElementById('name').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('dob').value = '';
+  document.getElementById('birthHour').value = '';
+  document.getElementById('birthMinute').value = '';
+  document.getElementById('birthAmPm').value = '';
+  document.getElementById('birthPlace').value = '';
+  document.getElementById('manualLat').value = '';
+  document.getElementById('manualLon').value = '';
+  document.getElementById('latlonRow').style.display = 'none';
+  document.getElementById('geocodeNote').style.display = 'none';
+  showPage('formPage');
+}
+
+function downloadReport() {
+  if (!window.reportData) return;
+  const { userData, sunSign, moonSign, currentMoon } = window.reportData;
+  const data = signData[sunSign];
+  const pillarData = pillarsBySign[sunSign];
+
+  const content = `
+LUNAR SANCTUARY: TRUE SIDEREAL MOON READING
+═══════════════════════════════════════════════════════
+For: ${userData.name}
+Generated: ${new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}
+Birth Date: ${new Date(userData.dob + 'T12:00:00').toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}${userData.birthTime ? ' at ' + userData.birthTime : ''}
+Birthplace: ${userData.birthPlace}
+
+CHART: ${data.glyph} ${sunSign} Sun  |  ☽ ${moonSign} Moon  |  ${data.element} · ${data.ruling}
+CURRENT MOON: ${currentMoon.name}, ${currentMoon.energy}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+${data.glyph}  YOUR TRUE SKY PLACEMENT: ${sunSign.toUpperCase()}
+─────────────────────────────────────────────────────
+Your Sun is in ${sunSign}, not the sign you may have been told. This is where the Sun actually was in the sky the day you were born, against the real IAU constellation boundaries.
+${sunSign === 'Ophiuchus' ? '\nOphiuchus is the 13th constellation, the Serpent Bearer, the ancient healer. Known to the Babylonians and deliberately excluded from the 12-sign system.\n' : ''}
+Your reading this cycle is built around ${data.selfCare}.
+
+${data.restore}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+☽  THE MOON & YOU, RIGHT NOW
+─────────────────────────────────────────────────────
+Current Phase: ${currentMoon.name}
+Moon Energy: ${currentMoon.energy}
+
+${moonPhaseRestore[currentMoon.name]}
+
+Your ${moonSign} Moon:
+${moonSignInfo}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌿  YOUR PRESCRIPTION
+─────────────────────────────────────────────────────
+
+BODY
+${pillarData.body}
+
+NERVOUS SYSTEM
+${pillarData.emotional}
+
+ACTION
+${pillarData.spiritual}
+
+PATTERN
+${pillarData.energy}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+♡  THE REAL REASON YOU'RE STILL IN THE LOOP
+─────────────────────────────────────────────────────
+You've done the work. You know the patterns. You can name exactly what's happening and why. And you're still here, in the same loop, wondering why the understanding hasn't translated into anything different.
+
+That gap, between knowing and doing, is not a healing problem. It is a nervous system problem.
+
+You cannot think your way into a regulated state. You cannot consume your way there. The ${sunSign} in you, the ${moonSign} Moon that shapes how your inner world processes. These are not broken. They are doing exactly what they were built to do. The question is whether your nervous system has learned that it is finally safe to do something different.
+
+That is what the moon is for. Not inspiration. Not more insight. A consistent, cyclical framework that trains your system, slowly and reliably, to hold a bigger life than the loop allows.
+
+This reading is the start. What happens next is up to you.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+YOUR AFFIRMATION
+─────────────────────────────────────────────────────
+"${affirmations[sunSign]}"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WANT TO GO DEEPER?
+─────────────────────────────────────────────────────
+How To Train Your Dragon. Six weeks, the moon, your dragon, real life change.
+Track the cycle. Work with your placement. Train your nervous system to hold more.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Lunar Sanctuary ✦ AsOne.Earth
+  `.trim();
+
+  const blob = new Blob([content], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `Lunar-Sanctuary-${userData.name.replace(/\s+/g, '-')}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
+  
