@@ -686,27 +686,6 @@
   ::-webkit-scrollbar-track { background: var(--charcoal); }
   ::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.25); }
 </style>
-<script>
-  (function(w, d, t, h, s, n) {
-    w.FlodeskObject = n;
-    var fn = function() { (w[n].q = w[n].q || []).push(arguments); };
-    w[n] = w[n] || fn;
-    var f = d.getElementsByTagName(t)[0];
-    var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
-    var sm = d.createElement(t); sm.async = true; sm.type = 'module';
-    sm.src = h + s + '.mjs' + v; f.parentNode.insertBefore(sm, f);
-    var sn = d.createElement(t); sn.async = true; sn.noModule = true;
-    sn.src = h + s + '.js' + v; f.parentNode.insertBefore(sn, f);
-  })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
-</script>
-<style>
-  #fd-form-69cacf17b4b099d7db1b0e8c { background: transparent !important; }
-  #fd-form-69cacf17b4b099d7db1b0e8c .fd-form-container { background: transparent !important; padding: 0 !important; box-shadow: none !important; border: none !important; }
-  #fd-form-69cacf17b4b099d7db1b0e8c input[type="email"] { background: rgba(42,42,42,0.7) !important; border: 1px solid rgba(201,169,110,0.3) !important; border-radius: 1px !important; color: #f5efe8 !important; font-family: 'Montserrat', sans-serif !important; font-size: 0.9rem !important; font-weight: 300 !important; }
-  #fd-form-69cacf17b4b099d7db1b0e8c input[type="email"]::placeholder { color: #9a9087 !important; font-style: italic !important; }
-  #fd-form-69cacf17b4b099d7db1b0e8c button[type="submit"] { background: linear-gradient(135deg, rgba(201,169,110,0.15), rgba(201,169,110,0.08)) !important; border: 1px solid rgba(201,169,110,0.45) !important; border-radius: 1px !important; color: #e2c99a !important; font-family: 'Montserrat', sans-serif !important; font-size: 0.75rem !important; letter-spacing: 0.3em !important; text-transform: uppercase !important; }
-  #fd-form-69cacf17b4b099d7db1b0e8c .fd-form-title, #fd-form-69cacf17b4b099d7db1b0e8c label { color: #c8bfb4 !important; font-family: 'Montserrat', sans-serif !important; }
-</style>
 </head>
 <body>
 <div class="app">
@@ -723,12 +702,7 @@
       <div style="margin-top:8px;text-align:center;">
         <p style="color:var(--gold);font-size:1rem;letter-spacing:4px;">☽ ✦ ☾</p>
       </div>
-      <div style="max-width:420px;margin:32px auto 0;">
-        <div id="fd-form-69cacf17b4b099d7db1b0e8c"></div>
-        <script>
-          window.fd('form', { formId: '69cacf17b4b099d7db1b0e8c', containerEl: '#fd-form-69cacf17b4b099d7db1b0e8c' });
-        </script>
-      </div>
+
     </div>
   </header>
 
@@ -740,7 +714,7 @@
           <p style="margin-bottom:16px;line-height:1.6;font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold-light);">The right time doesn't arrive. It's created the moment you move.</p>
           <p style="margin-bottom:16px;line-height:1.9;">Lunar Sanctuary is your space to receive what has always been available to you. Guided by your true sky astrology, a mirror of who you actually are, not the sun sign you were told you were.</p>
           <p style="margin-bottom:16px;line-height:1.9;">Every 2 to 3 days the Moon changes sign. Each time it does, a different part of you comes to the surface. A part that has been waiting to be received, not managed.</p>
-          <p style="margin-bottom:16px;line-height:1.9;">This app shows you what's being activated in you right now. What you do with that awareness? That's entirely up to you.</p>
+          <p style="margin-bottom:16px;line-height:1.9;">This app shows you what's being activated right now. What you do with that awareness? That's entirely up to you.</p>
           <div style="margin:28px 0;padding:20px 24px;border:1px solid rgba(201,169,110,0.4);background:rgba(201,169,110,0.06);text-align:center;">
             <p style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--blush);line-height:1.6;margin-bottom:0;">Bookmark this page. The Moon changes sign every 2 to 3 days. Come back each time, or at least once a week. That is the practice. That is how the pattern changes.</p>
           </div>
@@ -804,12 +778,18 @@
       </div>
       <p id="geocodeNote" style="display:none;font-size:0.75rem;color:var(--blush-light);margin-top:-16px;font-style:italic;">Geocoding unavailable — enter coordinates manually for ASC and house calculations. <a href="https://www.latlong.net" target="_blank" style="color:var(--gold);text-decoration:underline;">Find your coordinates here.</a></p>
 
+      <div class="field-group">
+        <label>Your Email</label>
+        <input type="email" id="userEmail" placeholder="your@email.com" />
+        <p class="field-hint">You'll receive the weekly moon dispatch. Nothing else.</p>
+      </div>
+
       <button class="btn-primary" onclick="generateReading()">
         → &nbsp; Enter your Lunar Sanctuary &nbsp;
       </button>
 
       <div class="error-msg" id="errorMsg">Please fill in all required fields.</div>
-      <p class="privacy-note">Your details are used only to generate your reading. Nothing else.</p>
+      <p class="privacy-note">Your details generate your reading. Your email receives the weekly moon dispatch. Nothing else.</p>
     </div>
   </div>
 
@@ -1093,7 +1073,7 @@ const signData = {
 };
 
 const moonData = {
-  Aries:       'Your inner world moves fast and discharges quickly. When you're overwhelmed you loop in your head rather than moving. Physical action does more for what you feel than any amount of processing.',
+  Aries:       'Your inner world moves fast and discharges quickly. When you are overwhelmed you loop in your head rather than moving. Physical action does more for what you feel than any amount of processing.',
   Taurus:      'You needs safety before it opens. Disruption and unpredictability create unsettled at a deep level. Ritual, consistency and sensory presence are not indulgences. They are how your system learns to receive.',
   Gemini:      'Your inner world narrates everything with speed and precision. You heals when the narration pauses. Understanding a feeling and actually having it are different frequencies.',
   Cancer:      'Your inner world receives everything. You feel shifts in others before they are aware of them. That sensitivity has a cost. You needs your own own feelings tended to before anyone else\'s.',
@@ -1116,7 +1096,7 @@ const moonPhaseRestore = {
   'Full Moon':       'Everything is visible. What you feel is at full volume, including what has been quietly carried. This phase does not ask for more input. It asks what can be set down.',
   'Waning Gibbous':  'The peak has moved through. What remains is what was actually real. You is integrating not acquiring. Let what was just transmitted land in the body.',
   'Last Quarter':    'Something is completing its moment. The reading is not a new signal. It is finishing what is already in motion.',
-  'Waning Crescent': 'What you feel is quieting before the reset. This is genuine rest — you consolidating before the next cycle begins. What becomes clear in the quiet is often what matters most.'
+  'Waning Crescent': 'What you feel is quieting before the reset. This is genuine rest — consolidating before the next cycle begins. What becomes clear in the quiet is often what matters most.'
 };
 
 const pillars = [
@@ -1127,8 +1107,8 @@ const pillars = [
 ];
 
 const pillarsBySign = {
-  Aries:       { body: 'The body knows before the mind catches up. Movement clears the noise faster than thinking about it.', emotional: 'Discharge before processing. Shake, walk, sprint. See what what you feel is once you've moved the energy.', spiritual: 'Something has been circling. What you feel is available for one concrete move if you is ready.', energy: 'The impulse that keeps getting overridden is signal. It is worth asking what keeps blocking it.' },
-  Taurus:      { body: 'Slow, sensory, unhurried. Bath, earth, silence. Not as reward. As the actual condition you needs to receive.', emotional: 'You stabilises through repetition. One consistent practice does more than ten new ones.', spiritual: 'What you feel is not in more acquisition. It is in one thing already known, actually lived.', energy: 'Restoration is not laziness. It is how you builds capacity to hold a more of what's available.' },
+  Aries:       { body: 'The body knows before the mind catches up. Movement clears the noise faster than thinking about it.', emotional: 'Discharge before processing. Shake, walk, sprint. See what you feel once you have moved the energy.', spiritual: 'Something has been circling. What you feel is available for one concrete move if the body is ready.', energy: 'The impulse that keeps getting overridden is signal. It is worth asking what keeps blocking it.' },
+  Taurus:      { body: 'Slow, sensory, unhurried. Bath, earth, silence. Not as reward. As the actual condition you need to receive.', emotional: 'You settle through repetition. One consistent practice does more than ten new ones.', spiritual: 'What you feel is not in more acquisition. It is in one thing already known, actually lived.', energy: 'Restoration is not laziness. It is how you build capacity to hold more of what is available.' },
   Gemini:      { body: 'Movement that relocates from head to limbs. Not to stop the thinking. To think from somewhere with less static.', emotional: 'Writing to discover rather than document. There is signal in what only becomes visible in the doing of it.', spiritual: 'One insight from recent weeks is ready to move from understanding into something lived. Just one.', energy: 'Silence is not empty. There is signal in it that noise covers.' },
   Cancer:      { body: 'Water in any form. It is not coincidence that this placement and this element are the same.', emotional: 'Your own interior has a rhythm that needs attending before anyone else\'s. Non-negotiable.', spiritual: 'A boundary held without explanation is signal. It does not require justification to be real.', energy: 'You moves in tides. Ebb is not failure. It is part of the moment.' },
   Leo:         { body: 'Expressive movement — dance, stretch, anything that feels like yourself rather than exercise.', emotional: 'Creating with no audience in mind is a different way of being than performing. Something opens in that privacy.', spiritual: 'What would transmit from you if nothing was required of you? That is what you feel worth attending to.', energy: 'Receiving without deflecting is available as a practice. It is harder than it sounds for this placement.' },
@@ -1570,6 +1550,7 @@ function startOver() {
   document.getElementById('birthMinute').value = '';
   document.getElementById('birthAmPm').value = '';
   document.getElementById('birthPlace').value = '';
+  document.getElementById('userEmail').value = '';
   document.getElementById('manualLat').value = '';
   document.getElementById('manualLon').value = '';
   document.getElementById('latlonRow').style.display = 'none';
