@@ -685,6 +685,23 @@
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--charcoal); }
   ::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.25); }
+
+  /* Print / PDF styles */
+  @media print {
+    body { background: #1a1a1a !important; color: #f5efe8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body::before, body::after { display: none; }
+    header, #formPage, #loadingPage, .report-actions, footer { display: none !important; }
+    #reportPage { display: block !important; max-width: 100%; padding: 0; }
+    .report-header { padding: 20px 0; }
+    .report-card { background: rgba(53,53,53,0.8) !important; border: 1px solid rgba(201,169,110,0.2) !important; }
+    .care-pillars { grid-template-columns: repeat(2, 1fr); }
+    .section-icon { display: none; }
+    a { display: none; }
+    .btn-download, .btn-new { display: none !important; }
+    .app { padding: 0 20px; }
+    .report-section { page-break-inside: avoid; margin-bottom: 24px; }
+    .affirmation { page-break-inside: avoid; }
+  }
 </style>
 </head>
 <body>
@@ -695,7 +712,7 @@
     <h1>Lunar<br><em>Sanctuary</em></h1>
     <div class="divider"><span>✦</span></div>
     <div style="max-width:560px;margin:0 auto 40px;text-align:center;padding:0 24px;">
-      <p style="margin-bottom:12px;line-height:1.9;font-size:1rem;">You've done the work. You can see the patterns clearly. But the change hasn't landed in your real life the way it should.</p>
+      <p style="margin-bottom:12px;line-height:1.9;font-size:1rem;">You've done the work. You can see the patterns clearly. But the change hasn't landed in your real life.</p>
       <p style="margin-bottom:12px;line-height:1.9;font-size:1rem;">You solve. You manage. You tell yourself it's not the right moment, you don't have the time, the money, you're not ready. And you cycle the same patterns over and over.</p>
       <p style="margin-bottom:12px;line-height:1.9;font-size:1rem;">But in the delaying, overthinking and avoiding, you deny your own power to create lasting change.</p>
       <p style="margin-bottom:24px;line-height:1.9;font-size:1.05rem;color:var(--gold-light);">And power isn't taken. It has to be received.</p>
@@ -711,10 +728,14 @@
     <div class="form-card">
       <div class="form-intro">
         <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:32px;margin-bottom:8px;">
-          <p style="margin-bottom:16px;line-height:1.6;font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold-light);">The right time doesn't arrive. It's created the moment you move.</p>
-          <p style="margin-bottom:16px;line-height:1.9;">Lunar Sanctuary is your space to receive what has always been available to you. Guided by your true sky astrology, a mirror of who you actually are, not the sun sign you were told you were.</p>
-          <p style="margin-bottom:16px;line-height:1.9;">Every 2 to 3 days the Moon changes sign. Each time it does, a different part of you comes to the surface. A part that has been waiting to be received, not managed.</p>
-          <p style="margin-bottom:16px;line-height:1.9;">This app shows you what's being activated right now. What you do with that awareness? That's entirely up to you.</p>
+          <p style="margin-bottom:16px;line-height:1.6;font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold-light);"><strong>This app shows you what's being activated right now. What you do with that awareness? That's entirely up to you.</strong></p>
+          <p style="margin-bottom:20px;line-height:1.9;">Your True Sky Sun, Moon, and Rising are included, but this isn't a natal reading. Lunar Sanctuary shows what the current moon cycle is activating in you, in true cosmic timing.</p>
+          <p style="margin-bottom:10px;line-height:1.9;"><span style="color:var(--gold);">✦</span> &nbsp;Use it to track patterns, work with them consciously, and close the loops that keep repeating.</p>
+          <p style="margin-bottom:10px;line-height:1.9;"><span style="color:var(--gold);">✦</span> &nbsp;Check in each time the Moon changes sign. Notice what's coming up and work with it.</p>
+          <p style="margin-bottom:16px;line-height:1.9;"><span style="color:var(--gold);">✦</span> &nbsp;Do that consistently, and you stop reacting on autopilot. That is where change actually happens.</p>
+          <p style="margin-bottom:16px;line-height:1.9;"><span style="color:var(--gold);">✦</span> &nbsp;Share what came up in the group. Your nervous system changes faster in community than it ever will alone.</p>
+
+          <p style="margin-bottom:16px;line-height:1.6;font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold-light);"><strong>The right time doesn't arrive. It's created the moment you move.</strong></p>
           <div style="margin:28px 0;padding:20px 24px;border:1px solid rgba(201,169,110,0.4);background:rgba(201,169,110,0.06);text-align:center;">
             <p style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--blush);line-height:1.6;margin-bottom:0;">Bookmark this page. The Moon changes sign every 2 to 3 days. Come back each time, or at least once a week. That is the practice. That is how the pattern changes.</p>
           </div>
@@ -778,18 +799,14 @@
       </div>
       <p id="geocodeNote" style="display:none;font-size:0.75rem;color:var(--blush-light);margin-top:-16px;font-style:italic;">Geocoding unavailable — enter coordinates manually for ASC and house calculations. <a href="https://www.latlong.net" target="_blank" style="color:var(--gold);text-decoration:underline;">Find your coordinates here.</a></p>
 
-      <div class="field-group">
-        <label>Your Email</label>
-        <input type="email" id="userEmail" placeholder="your@email.com" />
-        <p class="field-hint">You'll receive the weekly moon dispatch. Nothing else.</p>
-      </div>
+
 
       <button class="btn-primary" onclick="generateReading()">
         → &nbsp; Enter your Lunar Sanctuary &nbsp;
       </button>
 
       <div class="error-msg" id="errorMsg">Please fill in all required fields.</div>
-      <p class="privacy-note">Your details generate your reading. Your email receives the weekly moon dispatch. Nothing else.</p>
+      <p class="privacy-note">Your details are used only to generate your reading. Nothing else.</p>
     </div>
   </div>
 
@@ -812,7 +829,7 @@
   <!-- REPORT PAGE -->
   <div id="reportPage" class="page">
     <div class="report-header">
-      <p class="report-subtitle">True Sidereal Reading · AsOne.Earth</p>
+      <p class="report-subtitle" id="reportSubtitle">AsOne.Earth</p>
       <h2 class="report-name" id="reportName">Your Reading</h2>
       <div class="chart-meta" id="chartMeta"></div>
     </div>
@@ -865,7 +882,7 @@
     <div class="report-section" id="careSection">
       <div class="section-header">
         <span class="section-icon">🌿</span>
-        <h3 class="section-title" id="careSectionTitle">Your Prescription</h3>
+        <h3 class="section-title" id="careSectionTitle">Your Self Care</h3>
         <div class="section-accent"></div>
       </div>
       <div class="care-pillars" id="carePillars"></div>
@@ -895,8 +912,10 @@
         <p style="font-size:0.9rem;color:var(--blush);line-height:1.8;margin-bottom:12px;">Every 2 to 3 days the Moon enters a new sign and your reading changes. Come back each time it shifts. That is the practice.</p>
         <p style="font-size:0.95rem;color:var(--blush);line-height:1.8;"><strong>Bookmark this page and come back each time the Moon shifts.</strong></p>
       </div>
-      <div style="text-align:center;margin-bottom:24px;">
-        <button class="btn-download" onclick="downloadReport()">↓ &nbsp; Download Your Reading &nbsp; ☽ ✦ ☾</button>
+      <div style="padding:24px 28px;margin-bottom:32px;border:1px solid rgba(201,169,110,0.2);background:rgba(201,169,110,0.04);text-align:center;">
+        <p style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold-light);margin-bottom:12px;">Awareness alone is just a more sophisticated way of staying stuck.</p>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:16px;">As it turns out, your nervous system regulates faster in community. Share what came up for you and move with others working the same cycle.</p>
+        <a href="YOUR_BUDDYBOSS_GROUP_URL" target="_blank" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,rgba(201,169,110,0.15),rgba(201,169,110,0.08));border:1px solid rgba(201,169,110,0.45);color:var(--gold-light);font-family:'Montserrat',sans-serif;font-size:0.78rem;letter-spacing:0.28em;text-transform:uppercase;text-decoration:none;">Share in the group</a>
       </div>
       <button class="btn-new" onclick="startOver()">Begin a new reading</button>
     </div>
@@ -1104,7 +1123,7 @@ const moonPhaseRestore = {
   'First Quarter':   'There is friction in this phase. Not because what you feel is wrong. Because you is genuinely reorganising around a different way of being. The reading is to stay in the middle of that rather than resolve it prematurely.',
   'Waxing Gibbous':  'What you feel is almost at full strength. This is where the threshold addiction pattern activates — pulling back at the exact moment it starts working. Notice that and keep going.',
   'Full Moon':       'Everything is visible. What you feel is at full volume, including what has been quietly carried. This phase does not ask for more input. It asks what can be set down.',
-  'Waning Gibbous':  'The peak has moved through. What remains is what was actually real. You is integrating not acquiring. Let what was just transmitted land in the body.',
+  'Waning Gibbous':  'The peak has moved through. What remains is what was actually real. You are integrating now, not acquiring. Let it land before reaching for the next thing.',
   'Last Quarter':    'Something is completing its moment. The reading is not a new signal. It is finishing what is already in motion.',
   'Waning Crescent': 'What you feel is quieting before the reset. This is genuine rest — consolidating before the next cycle begins. What becomes clear in the quiet is often what matters most.'
 };
@@ -1322,6 +1341,8 @@ async function buildAndShowReport() {
 
   // Header
   document.getElementById('reportName').textContent = userData.name;
+  const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  document.getElementById('reportSubtitle').textContent = today + ' · Moon in ' + currentMoonSign;
   document.getElementById('chartMeta').innerHTML = `
     <span><div class="dot"></div> ${data.glyph} ${sunSign} Sun${sunResult.onCusp ? ' ⚠' : ''}</span>
     <span><div class="dot"></div> ☽ ${moonSign} Moon${moonResult.onCusp ? ' ⚠' : ''}</span>
@@ -1352,7 +1373,7 @@ async function buildAndShowReport() {
   `;
 
   // Update prescription title
-  document.getElementById('careSectionTitle').textContent = `Your Prescription · ${currentMoonSign} Moon`;
+  document.getElementById('careSectionTitle').textContent = `Your Self Care · ${currentMoonSign} Moon`;
 
   // Ophiuchus section (static)
   const isSunOph     = sunSign === 'Ophiuchus';
@@ -1419,6 +1440,11 @@ Your voice rules — these are absolute:
 - Name lived experience not concept
 - Plain, precise language
 - Never diagnostic. Never heavy. The tone is: here it is, it was always here
+- Precision over poetry. If a line is beautiful but vague, cut it or sharpen it
+- Every line should name a specific behaviour, pattern or shift -- not an abstract spiritual state
+- Avoid poetic phrasing without function
+- End the threshold or action section with grounding: "Not later. Today." or equivalent
+- Occasional dry British understatement is welcome. Not jokes. Not cheeky. Just the quiet aside that names what everyone is thinking. Used sparingly -- once or twice per reading at most. Example tone: "Probably worth trying." or "As it turns out, understanding the pattern and changing it are not the same thing."
 
 The framework:
 - You work with 13 true true sky signs including Ophiuchus — the actual positions of constellations in the real sky, not a calendar fixed two thousand years ago. This means placements may differ from what the person was told. That difference matters.
@@ -1451,11 +1477,11 @@ Generate this exact JSON structure:
     "rising": "${ascSign ? `2 sentences. What this ${currentMoonSign} Moon is making available in the body and presence of a ${ascSign} Rising. How it shows up and what it is asking for.` : `null`}"
   },
   "dispatch": "3-4 sentences. The heart of this reading. Do NOT repeat the moon phase description already shown above. Lead with what is specifically available for THIS combination of placements right now. First: name the part of them that has been suppressed or waiting -- what this moon is bringing to the surface for them specifically. Then: name what becomes possible on the other side if they stay with it rather than manage it away. One brief line only on the pattern or the exit they might take. End with the possibility, not the problem.",
-  "threshold": "2 sentences. Two sides of the threshold for this combination right now. First sentence: what the pattern looks like when they take the exit -- specific to their placements, plain language. Second sentence: what is waiting on the other side if they stay. Not abstract. Lived and specific.",
+  "threshold": "2 sentences. Two sides of the threshold for this combination right now. First sentence: what the specific exit behaviour looks like for these placements -- name the exact thing they do (reflect more, refine more, wait for readiness, help someone else first). Second sentence: what is available on the other side -- concrete and behavioural, not poetic. End with: Not later. Today.",
   "pillars": {
     "body": "One sentence. What the body has access to right now for ${sunSign} under this ${currentMoonSign} Moon. An opening, not an instruction.",
-    "signal": "One sentence. What is coming to the surface in the inner world right now for this combination. What is asking to be received.",
-    "action": "One sentence. What becomes available to move from this cycle. A possibility, not a directive.",
+    "mind": "One sentence. What the mind is doing right now for this combination. What thought pattern or loop is running. Plain language.",
+    "emotions": "One sentence. What emotion or feeling is coming to the surface right now for this combination. What is asking to be felt rather than managed.",
     "pattern": "One sentence. The exit this combination is tempted to take right now. Named briefly, without judgment."
   },
   "affirmation": "One sentence, present tense, first person. What they are receiving or stepping into right now. For ${sunSign} Sun under this ${currentMoonSign} Moon. No wellness language. Plain, grounded, and empowering."
@@ -1506,10 +1532,10 @@ Generate this exact JSON structure:
 
     // Section 3: Pillars
     const pillarDefs = [
-      { key: 'body',    icon: '◯', name: 'Body' },
-      { key: 'signal',  icon: '〜', name: 'Signal' },
-      { key: 'action',  icon: '→', name: 'Action' },
-      { key: 'pattern', icon: '↺', name: 'Pattern' }
+      { key: 'body',      icon: '◯', name: 'Body' },
+      { key: 'mind',      icon: '〜', name: 'Mind' },
+      { key: 'emotions',  icon: '→', name: 'Emotions' },
+      { key: 'pattern',   icon: '↺', name: 'Pattern' }
     ];
     document.getElementById('carePillars').innerHTML = pillarDefs.map(p => `
       <div class="pillar">
