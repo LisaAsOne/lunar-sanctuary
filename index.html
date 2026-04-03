@@ -602,6 +602,9 @@
     padding-top: 48px;
     border-top: 1px solid rgba(201,169,110,0.12);
     margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .btn-download {
@@ -868,14 +871,20 @@
       <div class="report-card blush-tint" id="moonDispatchContent"></div>
     </div>
 
-    <!-- Section 2c: The Threshold -->
+    <!-- Section 2c: Threshold Guardians + What's Waiting -->
     <div class="report-section" id="thresholdSection">
       <div class="section-header">
-        <span class="section-icon">→</span>
-        <h3 class="section-title">The Threshold</h3>
+        <span class="section-icon">⚔</span>
+        <h3 class="section-title">Threshold Guardians</h3>
         <div class="section-accent"></div>
       </div>
-      <div class="report-card" style="border-color:rgba(122,158,135,0.25);background:rgba(122,158,135,0.04);" id="thresholdContent"></div>
+      <div class="report-card" style="border-color:rgba(232,180,168,0.25);background:rgba(232,180,168,0.04);">
+        <div id="thresholdContent"></div>
+        <div id="waitingBlock" style="margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.07);display:none;">
+          <p style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:400;color:var(--sage-light);margin-bottom:10px;font-style:italic;">What's waiting to be received</p>
+          <div id="waitingContent"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Section 3: Prescription -->
@@ -914,9 +923,10 @@
       </div>
       <div style="padding:24px 28px;margin-bottom:32px;border:1px solid rgba(201,169,110,0.2);background:rgba(201,169,110,0.04);text-align:center;">
         <p style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold-light);margin-bottom:12px;">Awareness alone is just a more sophisticated way of staying stuck.</p>
-        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:16px;">As it turns out, your nervous system regulates faster in community. Share what came up for you and move with others working the same cycle.</p>
-        <a href="https://asone.earth/groups/the-lunar-sanctuary/" target="_blank" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,rgba(201,169,110,0.15),rgba(201,169,110,0.08));border:1px solid rgba(201,169,110,0.45);color:var(--gold-light);font-family:'Montserrat',sans-serif;font-size:0.78rem;letter-spacing:0.28em;text-transform:uppercase;text-decoration:none;">Share in the group</a>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:16px;">You change faster in community than alone. Share what came up and move with others working the same cycle.</p>
+        <a href="https://asone.earth/groups/the-lunar-sanctuary/" target="_blank" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,rgba(201,169,110,0.15),rgba(201,169,110,0.08));border:1px solid rgba(201,169,110,0.45);color:var(--gold-light);font-family:'Montserrat',sans-serif;font-size:0.78rem;letter-spacing:0.28em;text-decoration:none;">Share in the AsOne.Earth Group</a>
       </div>
+      <button class="btn-download" onclick="downloadPDF()">Download Your Reading ☽</button>
       <button class="btn-new" onclick="startOver()">Begin a new reading</button>
     </div>
   </div>
@@ -926,6 +936,7 @@
   </footer>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2/astronomy.browser.min.js"></script>
 <script>
 // ── TRUE IAU 13-SIGN BOUNDARIES ──
@@ -961,7 +972,7 @@ const SIGN_QUALITY = {
   Gemini:      { polarity: 'Yang', element: 'Air',   quality: 'active and connective. Conditions support communication, curiosity and making connections between ideas.' },
   Cancer:      { polarity: 'Yin',  element: 'Water', quality: 'inward and nourishing. Conditions support emotional tending, rest and attending to what feels tender.' },
   Leo:         { polarity: 'Yang', element: 'Fire',  quality: 'radiant and expressive. Conditions support visibility, creativity and moving from the heart outward.' },
-  Virgo:       { polarity: 'Yin',  element: 'Earth', quality: 'discerning and integrative. Conditions support refining, organising and nervous system care.' },
+  Virgo:       { polarity: 'Yin',  element: 'Earth', quality: 'discerning and integrative. Conditions support refining, organising and taking care of yourself.' },
   Libra:       { polarity: 'Yang', element: 'Air',   quality: 'relational and clarifying. Conditions support decision-making, balance and honest exchange.' },
   Scorpius:    { polarity: 'Yin',  element: 'Water', quality: 'deep and transformative. Conditions support releasing, going beneath the surface and private restoration.' },
   Ophiuchus:   { polarity: 'Yin',  element: 'Water/Fire', quality: 'liminal and knowing. Conditions support trusting what you already carry rather than seeking more.' },
@@ -1087,17 +1098,17 @@ function getMidheaven(dob, birthTime, utcOffset, lon) {
 
 const signData = {
   Aries:       { element: 'Fire',  ruling: 'Mars',    glyph: '♈', selfCare: 'movement before deliberation', restore: 'Your placement is wired for action over analysis. The gap between impulse and doing is where what you feel gets lost for you. Not through force. Through noticing what is already ready to move and getting out of its way.' },
-  Taurus:      { element: 'Earth', ruling: 'Venus',   glyph: '♉', selfCare: 'landing before loading', restore: 'Your nervous system is the most signal-sensitive of all the placements. It needs to arrive somewhere fully before it can receive anything. The static for you is noise, rush and overstimulation. What you feel comes through stillness, sensation, the body fully present.' },
+  Taurus:      { element: 'Earth', ruling: 'Venus',   glyph: '♉', selfCare: 'landing before loading', restore: 'You need to arrive somewhere fully before you can feel anything clearly. The problem is noise, rush and overstimulation. What you feel comes through stillness, sensation, the body fully present.' },
   Gemini:      { element: 'Air',   ruling: 'Mercury', glyph: '♊', selfCare: 'presence before narration', restore: 'You can articulate the pattern with extraordinary precision. The static for you is the narration itself — the endless commentary that processes experience instead of having it. What you feel is in the pause. What becomes available when the analysis stops.' },
-  Cancer:      { element: 'Water', ruling: 'Moon',    glyph: '♋', selfCare: 'what you feel before everyone else\'s', restore: 'You receive other people\'s frequency before they\'ve even spoken. That is not a flaw. It is a feature running without boundaries. The static is everyone else\'s signal drowning out your own. The reading is always your interior first.' },
-  Leo:         { element: 'Fire',  ruling: 'Sun',     glyph: '♌', selfCare: 'signal without an audience', restore: 'Your placement is built to radiate. The static is performance — giving what you feel outward before you\'ve received it yourself. What becomes available when you create, express, move, with no one watching and nothing required of you.' },
-  Virgo:       { element: 'Earth', ruling: 'Mercury', glyph: '♍', selfCare: 'regulation before optimisation', restore: 'You understand the pattern completely. The static is the gap between understanding it and the body actually releasing it. That gap is not a thinking problem. It is a nervous system problem. What you feel comes through when the body feels safe enough to stop bracing.' },
-  Libra:       { element: 'Air',   ruling: 'Venus',   glyph: '♎', selfCare: 'decision before negotiation', restore: 'Your nervous system runs constant calibration. Weighing, adjusting, sensing the room. The static is the endless weighing. What you feel is the moment you make a decision for yourself, without reference to anyone else\'s frequency, and let it stand.' },
-  Scorpius:    { element: 'Water', ruling: 'Pluto',   glyph: '♏', selfCare: 'release before more depth', restore: 'You carry more signal than almost any other placement. The static is accumulation — absorbing, holding, processing, never putting down. The reading is not more depth work. It is conscious release. What you set down creates more space for what you feel than anything you could excavate.' },
-  Ophiuchus:   { element: 'Water/Fire', ruling: 'Chiron', glyph: '⛎', selfCare: 'embodying what you already know', restore: 'You carry the oldest signal. You have always known things others are still learning. The static is the waiting — for enough healing, enough permission, enough proof that you are ready. What you feel has been live the whole time. The reading is to stop waiting and start living from what you already receive.' },
+  Cancer:      { element: 'Water', ruling: 'Moon',    glyph: '♋', selfCare: 'what you feel before everyone else\'s', restore: 'You pick up other people\'s emotional state before they\'ve even spoken. That is not a flaw. It is a capacity running without boundaries. The problem is everyone else drowning out your own interior. The reading is always your interior first.' },
+  Leo:         { element: 'Fire',  ruling: 'Sun',     glyph: '♌', selfCare: 'creating without an audience', restore: 'Your placement is built to radiate. The problem is performance — giving what you feel outward before you\'ve received it yourself. What becomes available when you create, express, move, with no one watching and nothing required of you.' },
+  Virgo:       { element: 'Earth', ruling: 'Mercury', glyph: '♍', selfCare: 'action before analysis', restore: 'You understand the pattern completely. The gap is between understanding the pattern and the body actually releasing it. That is not a thinking problem. What you feel comes through when the body finally stops bracing.' },
+  Libra:       { element: 'Air',   ruling: 'Venus',   glyph: '♎', selfCare: 'decision before negotiation', restore: 'You run constant calibration. Weighing, adjusting, sensing the room. The problem is the endless weighing. What you feel is the moment you make a decision for yourself, without reference to anyone else, and let it stand.' },
+  Scorpius:    { element: 'Water', ruling: 'Pluto',   glyph: '♏', selfCare: 'release before more depth', restore: 'You carry more than almost any other placement. The problem is accumulation — absorbing, holding, processing, never putting down. The reading is not more depth work. It is conscious release. What you set down creates more space for what you feel than anything you could excavate.' },
+  Ophiuchus:   { element: 'Water/Fire', ruling: 'Chiron', glyph: '⛎', selfCare: 'embodying what you already know', restore: 'You have always known things others are still learning. The problem is the waiting — for enough healing, enough permission, enough proof that you are ready. What you know has been there the whole time. Stop waiting and start living from it.' },
   Sagittarius: { element: 'Fire',  ruling: 'Jupiter', glyph: '♐', selfCare: 'completion before another beginning', restore: 'Your placement is oriented toward the horizon. The static is perpetual beginning — always moving toward the next thing before this one has finished available. What you feel is in completion. Something is closer to done than it looks.' },
-  Capricorn:   { element: 'Earth', ruling: 'Saturn',  glyph: '♑', selfCare: 'rest as signal not reward', restore: 'Your nervous system learned to treat rest as something earned. The static is the constant output that prevents the system from ever receiving. Rest is not recovery from the work. It is how the nervous system learns it is finally safe enough to tune in.' },
-  Aquarius:    { element: 'Air',   ruling: 'Uranus',  glyph: '♒', selfCare: 'presence before vision', restore: 'You receive signal at altitude — future-oriented, collective, wide. The static is the distance from the body that altitude creates. The reading is to come down into the present moment, this week, this body, where what you feel actually needs to be lived.' },
+  Capricorn:   { element: 'Earth', ruling: 'Saturn',  glyph: '♑', selfCare: 'rest as priority, not reward', restore: 'You learned to treat rest as something earned. The problem is constant output that prevents you from ever receiving. Rest is not recovery from the work. It is how the body finally feels safe enough to slow down.' },
+  Aquarius:    { element: 'Air',   ruling: 'Uranus',  glyph: '♒', selfCare: 'presence before vision', restore: 'You think at altitude — future-oriented, collective, wide. The problem is the distance from the body that creates. Come down into the present moment, this week, this body, where what you feel actually needs to be lived.' },
   Pisces:      { element: 'Water', ruling: 'Neptune', glyph: '♓', selfCare: 'your own rhythm before everyone else\'s', restore: 'You are the most porous of all the placements. You receive everything. The static is the absence of a container — your own rhythm merging with everyone else\'s until you cannot locate yourself. The reading is always the same: know where you end.' }
 };
 
@@ -1106,13 +1117,13 @@ const moonData = {
   Taurus:      'You needs safety before it opens. Disruption and unpredictability create unsettled at a deep level. Ritual, consistency and sensory presence are not indulgences. They are how your system learns to receive.',
   Gemini:      'Your inner world narrates everything with speed and precision. You heals when the narration pauses. Understanding a feeling and actually having it are different frequencies.',
   Cancer:      'Your inner world receives everything. You feel shifts in others before they are aware of them. That sensitivity has a cost. You needs your own own feelings tended to before anyone else\'s.',
-  Leo:         'Your inner world wants to be received, not performed. The static builds when so much signal moves outward that nothing remains for the interior. Being witnessed is a different thing from being useful.',
-  Virgo:       'Your inner world processes through analysis. The loop — where understanding the pattern does not shift it — is a nervous system pattern not a thinking problem. You needs safety to release the bracing, not more insight.',
+  Leo:         'Your inner world wants to be received, not performed. The problem is when so much moves outward that nothing remains for the interior. Being witnessed is a different thing from being useful.',
+  Virgo:       'Your inner world processes through analysis. The loop — where understanding the pattern does not shift it — is a body problem, not a thinking problem. The body needs to feel safe enough to release the bracing. More insight does not do that.',
   Libra:       'Your inner world runs constant calibration. That work is exhausting and invisible. You settles in moments of clear uncontested decision, especially ones made entirely for yourself.',
-  Scorpio:     'Your inner world is vast and largely private. You carry more signal than you show. You can learn to put things down as well as hold them. Not everything held needs to be processed first.',
+  Scorpio:     'Your inner world is vast and largely private. You carry more than you show. You can learn to put things down as well as hold them. Not everything held needs to be processed first.',
   Ophiuchus:   'Your inner world holds two frequencies at once — the ordinary and the beneath-it. That is not a problem to resolve. It is the gift. You heals when it trusts what it receives rather than manages it.',
   Sagittarius: 'Your inner world needs meaning as much as movement. When what you feel feels cut off it is often because the point is not yet visible. You responds to hope that is specific and embodied, not abstract.',
-  Capricorn:   'Your inner world cloaks signal in productivity. Feeling waits until the list is done, which means it rarely comes. You is asking for receiving before fixing. That is not weakness. That is the work.',
+  Capricorn:   'Your inner world cloaks feeling in productivity. Feeling waits until the list is done, which means it rarely comes. You is asking for receiving before fixing. That is not weakness. That is the work.',
   Aquarius:    'Your inner world operates at altitude. Brilliant, future-oriented, sometimes at a remove from the body. You heals when you come back into the physical — breath, sensation, this moment.',
   Pisces:      'Your inner world is oceanic and without natural walls. You receive the rhythm of every room you enter. You need containers — clear endings, defined edges, knowing where you stop.'
 };
@@ -1124,7 +1135,7 @@ const moonPhaseRestore = {
   'Waxing Gibbous':  'What you feel is almost at full strength. This is where the threshold addiction pattern activates — pulling back at the exact moment it starts working. Notice that and keep going.',
   'Full Moon':       'Everything is visible. What you feel is at full volume, including what has been quietly carried. This phase does not ask for more input. It asks what can be set down.',
   'Waning Gibbous':  'The peak has moved through. What remains is what was actually real. You are integrating now, not acquiring. Let it land before reaching for the next thing.',
-  'Last Quarter':    'Something is completing its moment. The reading is not a new signal. It is finishing what is already in motion.',
+  'Last Quarter':    'Something is completing its moment. The reading is not a new beginning. It is finishing what is already in motion.',
   'Waning Crescent': 'What you feel is quieting before the reset. This is genuine rest — consolidating before the next cycle begins. What becomes clear in the quiet is often what matters most.'
 };
 
@@ -1136,19 +1147,19 @@ const pillars = [
 ];
 
 const pillarsBySign = {
-  Aries:       { body: 'The body knows before the mind catches up. Movement clears the noise faster than thinking about it.', emotional: 'Discharge before processing. Shake, walk, sprint. See what you feel once you have moved the energy.', spiritual: 'Something has been circling. What you feel is available for one concrete move if the body is ready.', energy: 'The impulse that keeps getting overridden is signal. It is worth asking what keeps blocking it.' },
+  Aries:       { body: 'The body knows before the mind catches up. Movement clears the noise faster than thinking does.', emotional: 'Discharge before processing. Shake, walk, sprint. See what you feel once you have moved.', spiritual: 'Something has been circling. What you feel is available for one concrete move if the body is ready.', energy: 'The impulse that keeps getting overridden is worth listening to. It is worth asking what keeps blocking it.' },
   Taurus:      { body: 'Slow, sensory, unhurried. Bath, earth, silence. Not as reward. As the actual condition you need to receive.', emotional: 'You settle through repetition. One consistent practice does more than ten new ones.', spiritual: 'What you feel is not in more acquisition. It is in one thing already known, actually lived.', energy: 'Restoration is not laziness. It is how you build capacity to hold more of what is available.' },
-  Gemini:      { body: 'Movement that relocates from head to limbs. Not to stop the thinking. To think from somewhere with less static.', emotional: 'Writing to discover rather than document. There is signal in what only becomes visible in the doing of it.', spiritual: 'One insight from recent weeks is ready to move from understanding into something lived. Just one.', energy: 'Silence is not empty. There is signal in it that noise covers.' },
-  Cancer:      { body: 'Water in any form. It is not coincidence that this placement and this element are the same.', emotional: 'Your own interior has a rhythm that needs attending before anyone else\'s. Non-negotiable.', spiritual: 'A boundary held without explanation is signal. It does not require justification to be real.', energy: 'You moves in tides. Ebb is not failure. It is part of the moment.' },
+  Gemini:      { body: 'Movement that relocates from head to limbs. Not to stop the thinking. To think from somewhere quieter.', emotional: 'Writing to discover rather than document. There is information in what only becomes visible in the doing of it.', spiritual: 'One insight from recent weeks is ready to move from understanding into something lived. Just one.', energy: 'Silence is not empty. There is something in it that noise covers.' },
+  Cancer:      { body: 'Water in any form. It is not coincidence that this placement and this element are the same.', emotional: 'Your own interior has a rhythm that needs attending before anyone else\'s. Non-negotiable.', spiritual: 'A boundary held without explanation does not require justification to be real.', energy: 'You moves in tides. Ebb is not failure. It is part of the moment.' },
   Leo:         { body: 'Expressive movement — dance, stretch, anything that feels like yourself rather than exercise.', emotional: 'Creating with no audience in mind is a different way of being than performing. Something opens in that privacy.', spiritual: 'What would you express if nothing was required of you and no one was watching? Start there.', energy: 'Receiving without deflecting is available as a practice. It is harder than it sounds for this placement.' },
   Virgo:       { body: 'Regulation before the list. Breath, cold water, a slow walk. The list will still be there.', emotional: 'Self-compassion applied to one specific thing. Not as a general aspiration. As a direct practice.', spiritual: 'Imperfect transmission beats perfect preparation. What you feel does not wait for readiness.', energy: 'Rest without earning it. Once. You learns safety through the experience of stopping.' },
-  Libra:       { body: 'Calm, beautiful environments. You reads the rhythm of every room. Create a room worth reading.', emotional: 'Naming what is actually out of alignment before attempting to fix it. Signal before solution.', spiritual: 'A decision made for yourself, without reference to anyone else\'s frequency. Available now.', energy: 'A boundary is not a rejection. It is you maintaining its own signal.' },
-  Scorpius:    { body: 'Deep rest, water, privacy. The body processes significant signal in the dark without your management.', emotional: 'Setting something down is different from processing it. Conscious release creates more space than further excavation.', spiritual: 'Something being carried that was never part of your original frequency. Worth naming.', energy: 'Energetic cleansing is not metaphorical for this placement. Salt, sound and sleep all work.' },
-  Ophiuchus:   { body: 'Grounding what you feel in the body. Breath, earth, slow movement. The body often carries what the mind is still working out.', emotional: 'The waiting for enough healing before moving is itself the noise. What you feel has been live longer than the waiting suggests.', spiritual: 'The gap between who you know yourself to be and how that is lived does not need to close all at once. One degree today.', energy: 'Between is not broken. It is a location with its own frequency.' },
-  Sagittarius: { body: 'Outside, moving, under open sky. This interface does not maintain signal well in small enclosed spaces for extended periods.', emotional: 'Meaning unlocks momentum for this placement. Where is the meaning in what is currently available?', spiritual: 'Something already started is closer to completion than it appears. What you feel supports finishing.', energy: 'Another beginning is always available. Completion is the rarer frequency.' },
-  Capricorn:   { body: 'Intentional rest treated as the priority transmission, not recovery from everything else.', emotional: 'Not being fine is available as a temporary state, with someone safe. What you feel does not always need to be managed.', spiritual: 'What is being built for yourself, separate from what is being built for others? That frequency matters.', energy: 'You learns it is safe through the experience of stopping. Rest is signal, not silence.' },
-  Aquarius:    { body: 'Somatic practices — breathwork, body scanning — that return signal from altitude to the body.', emotional: 'The present moment contains signal the long view makes harder to receive. Come down.', spiritual: 'Something already known that keeps not being lived. The static is worth examining here.', energy: 'The disconnection from the body is the noise, not the uniqueness. The body is where signal lands.' },
-  Pisces:      { body: 'Water, sleep, gentle movement. The body processes signal while you rest. It does not always need direction.', emotional: 'A container with a clear ending. Not to limit the depth. To know where your own rhythm stops.', spiritual: 'A boundary without explanation is available. It is signal, not rejection.', energy: 'You do not have to receive everything that is broadcasting. Staying in your own frequency is a practice.' }
+  Libra:       { body: 'Calm, beautiful environments. You reads the rhythm of every room. Create a room worth reading.', emotional: 'Naming what is actually out of alignment before attempting to fix it.', spiritual: 'A decision made for yourself, without reference to anyone else. Available now.', energy: 'A boundary is not a rejection. It is you maintaining your own ground.' },
+  Scorpius:    { body: 'Deep rest, water, privacy. The body processes a great deal while you rest, without your management.', emotional: 'Setting something down is different from processing it. Conscious release creates more space than further excavation.', spiritual: 'Something being carried that was never really yours. Worth naming.', energy: 'Salt, sound and sleep all work for this placement.' },
+  Ophiuchus:   { body: 'Grounding what you feel in the body. Breath, earth, slow movement. The body often carries what the mind is still working out.', emotional: 'The waiting for enough healing before moving is itself the delay. What you know has been there longer than the waiting suggests.', spiritual: 'The gap between who you know yourself to be and how that is lived does not need to close all at once. One degree today.', energy: 'Between is not broken. It is a location.' },
+  Sagittarius: { body: 'Outside, moving, under open sky. You do not do well in small enclosed spaces for extended periods.', emotional: 'Meaning unlocks momentum for this placement. Where is the meaning in what is currently available?', spiritual: 'Something already started is closer to completion than it appears. What you feel supports finishing.', energy: 'Another beginning is always available. Completion is the rarer thing.' },
+  Capricorn:   { body: 'Intentional rest treated as the priority, not recovery from everything else.', emotional: 'Not being fine is available as a temporary state, with someone safe. What you feel does not always need to be fixed.', spiritual: 'What is being built for yourself, separate from what is being built for others? That matters.', energy: 'You learn it is safe through the experience of stopping. Rest is not silence. It is how you refill.' },
+  Aquarius:    { body: 'Breathwork, body scanning, anything that brings you back into the present body from altitude.', emotional: 'The present moment contains what the long view makes harder to feel. Come down.', spiritual: 'Something already known that keeps not being lived. That gap is worth examining.', energy: 'The disconnection from the body is the problem, not the uniqueness. The body is where things land.' },
+  Pisces:      { body: 'Water, sleep, gentle movement. The body processes a great deal while you rest. It does not always need direction.', emotional: 'A container with a clear ending. Not to limit the depth. To know where your own rhythm stops.', spiritual: 'A boundary without explanation is available. It is not rejection.', energy: 'You do not have to take in everything around you. Staying in your own rhythm is a practice.' }
 };
 
 const alchemical = {
@@ -1177,7 +1188,7 @@ const affirmations = {
   Scorpius:    'What I have been carrying was never what you feel. I put it down.',
   Ophiuchus:   'I was never separate from what I know. I am done pretending otherwise.',
   Sagittarius: 'I am not looking for what you feel. I am it. I move from there.',
-  Capricorn:   'Rest is not absence of signal. It is how what you feel gets stronger.',
+  Capricorn:   'Rest is not emptiness. It is how what you feel gets stronger.',
   Aquarius:    'What you feel does not live in the altitude. It lives in the body.',
   Pisces:      'I know where I end. That is not a limitation. That is sovereignty.'
 };
@@ -1189,7 +1200,7 @@ let userData = {};
 const loadingMessages = [
   'Locating your true sky placement',
   'Reading the actual sky',
-  'Calculating the current moon signal',
+  'Reading the current moon position',
   'Building your reading',
   'Almost ready'
 ];
@@ -1386,21 +1397,23 @@ async function buildAndShowReport() {
     ? '<p><em>The Moon is in Ophiuchus right now.</em></p>'
     : `<p><em>This cycle, the Moon moves through Ophiuchus on ${nextOphDate}.</em></p>`;
 
-  let ophiuchusHtml = '';
+  // General 13-sign explanation -- always shown
+  const ophiuchusGeneral = `<div style="margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.07);"><p style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:400;color:var(--gold-light);margin-bottom:14px;">12 signs repeat the loop. 13 closes it.</p><p>The most widely used modern system was fixed to the four seasons over two thousand years ago. It became static, repeating the same cycle again and again. In many ways, that mirrors what happens when we get stuck in patterns that never fully resolve. But the point is not to break the cycle by force. It is to let it complete.</p><p>The sky is not static. It never stopped moving. There are 13 constellations the Sun passes through, not twelve.</p><p>Ophiuchus, the 13th sign, completes the cycle and opens a passage into expanded consciousness, a wider awareness of who we truly are. From here, decisions are no longer made from repetition, but from clarity. It is an interruption point. A place where the pattern cannot continue as it was.</p><p>The Moon moves through all thirteen signs across its cycle, including Ophiuchus, even though most people were never taught to look for it.</p>${ophDateLine}</div>`;
+
+  let ophiuchusPersonal = '';
   if (isSunOph) {
-    ophiuchusHtml = `<p><strong>Your Sun is in Ophiuchus.</strong> You are the 13th. The one the system left out because it could not be contained in a calendar.</p><p>Ophiuchus is the union of masculine and feminine in the non-local identity. Not a wound to heal. A frequency to receive. The ancient healer, the serpent bearer, the one who stands between death and life and knows both without being consumed by either.</p><p>Your reading is not about doing more. It is about receiving what you already are.</p>${ophDateLine}`;
+    ophiuchusPersonal = `<p><strong>Your Sun is in Ophiuchus.</strong> You are the 13th. The one the system left out because it could not be contained in a calendar.</p><p>Ophiuchus is the union of masculine and feminine in the non-local identity. Not a wound to heal. Something to receive. The ancient healer, the serpent bearer, the one who stands between death and life and knows both without being consumed by either.</p><p>Your reading is not about doing more. It is about receiving what you already are.</p>`;
   } else if (isAscOph) {
-    ophiuchusHtml = `<p><strong>Your Ascendant is in Ophiuchus.</strong> The 13th frequency is the lens through which you meet the world.</p><p>Ophiuchus rising means you have always carried the 13th signal, whether or not the world has had language for it. The frame was too small. What you feel was always fine.</p>${ophDateLine}`;
+    ophiuchusPersonal = `<p><strong>Your Ascendant is in Ophiuchus.</strong> The 13th is the lens through which you meet the world.</p><p>Ophiuchus rising means you have always carried this, whether or not the world has had language for it. The frame was too small. What you feel was always fine.</p>`;
   } else if (isMoonOph) {
-    ophiuchusHtml = `<p><strong>Your natal Moon is in Ophiuchus.</strong> Your emotional interface runs on the 13th frequency.</p><p>Your inner world has always received signal that most systems have no language for. The reading is not to expand the receiving. It is to stop managing it.</p>${ophDateLine}`;
+    ophiuchusPersonal = `<p><strong>Your natal Moon is in Ophiuchus.</strong> Your inner world runs on the 13th.</p><p>Your inner world has always received what most systems have no language for. The reading is not to expand the receiving. It is to stop managing it.</p>`;
   } else if (isCurrentOph) {
-    ophiuchusHtml = `<p><strong>The Moon is currently moving through Ophiuchus.</strong> The 13th frequency is available to everyone right now.</p><p>This is what you feel most systems edit out — between Scorpius and Sagittarius, between transformation and expansion. Whatever your natal placement, the collective interface has access to it right now.</p>${ophDateLine}`;
+    ophiuchusPersonal = `<p><strong>The Moon is currently moving through Ophiuchus.</strong> The 13th frequency is available to everyone right now.</p><p>This is what you feel most systems edit out — between Scorpius and Sagittarius, between transformation and expansion. Whatever your natal placement, the collective interface has access to it right now.</p>`;
   } else if (isAdjacent) {
-    ophiuchusHtml = `<p><strong>Your Sun is in ${sunSign}, adjacent to Ophiuchus.</strong> You live next door to the 13th frequency.</p><p>${sunSign === 'Scorpius' ? 'Scorpius sits just before Ophiuchus in the real sky. You carry the depth and transformation that are the preparation for what Ophiuchus holds.' : 'Sagittarius sits just after Ophiuchus. You carry the expansion and meaning that emerge on the other side of what Ophiuchus holds.'}</p>${ophDateLine}`;
-  } else {
-    ophiuchusHtml = `<p><strong>12 signs repeat the loop. 13 closes it.</strong></p><p>Ophiuchus is always there in the real sky, between Scorpius and Sagittarius. It was removed from the zodiac not because it was not real, but because it could not be contained in a calendar. This reading is built on a system that includes it.</p>${ophDateLine}`;
+    ophiuchusPersonal = `<p><strong>Your Sun is in ${sunSign}, adjacent to Ophiuchus.</strong> You live next door to the 13th frequency.</p><p>${sunSign === 'Scorpius' ? 'Scorpius sits just before Ophiuchus in the real sky. You carry the depth and transformation that are the preparation for what Ophiuchus holds.' : 'Sagittarius sits just after Ophiuchus. You carry the expansion and meaning that emerge on the other side of what Ophiuchus holds.'}</p>`;
   }
-  document.getElementById('ophiuchusContent').innerHTML = ophiuchusHtml;
+
+  document.getElementById('ophiuchusContent').innerHTML = ophiuchusPersonal + ophiuchusGeneral;
 
   // Show the page now with loading states for AI sections
   showPage('reportPage');
@@ -1414,6 +1427,8 @@ async function buildAndShowReport() {
   document.getElementById('soulContent').innerHTML = loadingHtml;
   document.getElementById('moonDispatchContent').innerHTML = loadingHtml;
   document.getElementById('thresholdContent').innerHTML = loadingHtml;
+  document.getElementById('waitingContent').innerHTML = '';
+  document.getElementById('waitingBlock').style.display = 'none';
   document.getElementById('carePillars').innerHTML = loadingHtml;
   document.getElementById('affirmationText').textContent = '';
 
@@ -1477,7 +1492,8 @@ Generate this exact JSON structure:
     "rising": "${ascSign ? `2 sentences. What this ${currentMoonSign} Moon is making available in the body and presence of a ${ascSign} Rising. How it shows up and what it is asking for.` : `null`}"
   },
   "dispatch": "3-4 sentences. The heart of this reading. Do NOT repeat the moon phase description already shown above. Lead with what is specifically available for THIS combination of placements right now. First: name the part of them that has been suppressed or waiting -- what this moon is bringing to the surface for them specifically. Then: name what becomes possible on the other side if they stay with it rather than manage it away. One brief line only on the pattern or the exit they might take. End with the possibility, not the problem.",
-  "threshold": "2 sentences. Two sides of the threshold for this combination right now. First sentence: what the specific exit behaviour looks like for these placements -- name the exact thing they do (reflect more, refine more, wait for readiness, help someone else first). Second sentence: what is available on the other side -- concrete and behavioural, not poetic. End with: Not later. Today.",
+  "thresholdGuardians": "1-2 sentences. Name the specific exit behaviours for this combination -- exactly what they do to avoid crossing the threshold. Name the behaviour, not the feeling. Plain, precise, slightly dry.",
+  "whatsWaiting": "1-2 sentences. What is concretely available on the other side if they stay. Behavioural and specific, not poetic. End with: Not later. Today.",
   "pillars": {
     "body": "One sentence. What the body has access to right now for ${sunSign} under this ${currentMoonSign} Moon. An opening, not an instruction.",
     "mind": "One sentence. What the mind is doing right now for this combination. What thought pattern or loop is running. Plain language.",
@@ -1488,6 +1504,7 @@ Generate this exact JSON structure:
 }`;
 
   try {
+    console.log('Calling Anthropic API...');
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -1535,7 +1552,7 @@ Generate this exact JSON structure:
       { key: 'body',      icon: '◯', name: 'Body' },
       { key: 'mind',      icon: '〜', name: 'Mind' },
       { key: 'emotions',  icon: '→', name: 'Emotions' },
-      { key: 'pattern',   icon: '↺', name: 'Pattern' }
+      { key: 'pattern',   icon: '↺', name: 'Pattern Interruption' }
     ];
     document.getElementById('carePillars').innerHTML = pillarDefs.map(p => `
       <div class="pillar">
@@ -1545,9 +1562,14 @@ Generate this exact JSON structure:
       </div>
     `).join('');
 
-    // Threshold
-    if (ai.threshold) {
-      document.getElementById('thresholdContent').innerHTML = `<p style="line-height:1.85;font-size:0.95rem;">${ai.threshold}</p>`;
+    // Threshold Guardians
+    if (ai.thresholdGuardians) {
+      document.getElementById('thresholdContent').innerHTML = `<p style="line-height:1.85;font-size:0.95rem;">${ai.thresholdGuardians}</p>`;
+    }
+    // What's Waiting
+    if (ai.whatsWaiting) {
+      document.getElementById('waitingContent').innerHTML = `<p style="line-height:1.85;font-size:0.95rem;">${ai.whatsWaiting}</p>`;
+      document.getElementById('waitingBlock').style.display = 'block';
     }
 
     // Affirmation
@@ -1555,6 +1577,8 @@ Generate this exact JSON structure:
 
   } catch(err) {
     console.error('AI generation failed:', err);
+    document.getElementById('thresholdContent').innerHTML = '<p style="color:var(--blush-light);font-size:0.85rem;font-style:italic;">Reading unavailable right now. Please refresh to try again.</p>';
+    document.getElementById('waitingContent').innerHTML = '';
     // Fallback to static content
     const pillarData = pillarsBySign[sunSign];
     document.getElementById('soulContent').innerHTML = `
@@ -1664,6 +1688,117 @@ Lunar Sanctuary ✦ AsOne.Earth
   a.download = `Lunar-Sanctuary-${userData.name.replace(/\s+/g, '-')}.txt`;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+function downloadPDF() {
+  if (!window.reportData) return;
+  const { userData, sunSign, moonSign, ascSign, currentMoonSign, currentMoon } = window.reportData;
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const margin = 20;
+  const maxW = pageW - margin * 2;
+  let y = 0;
+
+  // Dark background
+  doc.setFillColor(42, 42, 42);
+  doc.rect(0, 0, pageW, pageH, 'F');
+
+  function newPage() {
+    doc.addPage();
+    doc.setFillColor(42, 42, 42);
+    doc.rect(0, 0, pageW, pageH, 'F');
+    y = margin;
+  }
+
+  function checkY(needed) {
+    if (y + needed > pageH - margin) newPage();
+  }
+
+  function drawText(text, size, r, g, b, bold, indent) {
+    doc.setFontSize(size);
+    doc.setTextColor(r, g, b);
+    if (bold) doc.setFont('helvetica', 'bold');
+    else doc.setFont('helvetica', 'normal');
+    const x = margin + (indent || 0);
+    const lines = doc.splitTextToSize(text, maxW - (indent || 0));
+    checkY(lines.length * (size * 0.45));
+    doc.text(lines, x, y);
+    y += lines.length * (size * 0.45) + 3;
+  }
+
+  function divider() {
+    checkY(8);
+    doc.setDrawColor(201, 169, 110, 0.3);
+    doc.setLineWidth(0.3);
+    doc.line(margin, y, pageW - margin, y);
+    y += 8;
+  }
+
+  function section(title) {
+    checkY(14);
+    y += 4;
+    drawText(title.toUpperCase(), 8, 201, 169, 110, true);
+    y += 2;
+  }
+
+  function body(text) {
+    if (!text) return;
+    drawText(text.replace(/<[^>]+>/g, ''), 10, 245, 239, 232, false);
+  }
+
+  y = margin;
+
+  // Header
+  drawText('LUNAR SANCTUARY', 18, 226, 201, 154, true);
+  y += 2;
+  drawText('True Sky Reading · AsOne.Earth', 9, 200, 191, 180, false);
+  y += 4;
+  drawText(`For ${userData.name}`, 11, 245, 239, 232, false);
+  drawText(new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }), 9, 154, 143, 135, false);
+  drawText(`${sunSign} Sun · ${moonSign} Moon${ascSign ? ' · ' + ascSign + ' Rising' : ''}`, 10, 226, 201, 154, true);
+  drawText(`Moon now in ${currentMoonSign} · ${currentMoon.name}`, 9, 168, 196, 176, false);
+
+  divider();
+
+  section('Your True Sky Placements');
+  body(document.getElementById('soulContent')?.innerText);
+
+  divider();
+
+  section('This Cycle, For You');
+  body(document.getElementById('moonDispatchContent')?.innerText);
+
+  divider();
+
+  section('Threshold Guardians');
+  body(document.getElementById('thresholdContent')?.innerText);
+  const waiting = document.getElementById('waitingContent')?.innerText;
+  if (waiting) {
+    y += 4;
+    drawText('What\'s waiting to be received', 10, 168, 196, 176, true);
+    body(waiting);
+  }
+
+  divider();
+
+  section('Your Self Care');
+  body(document.getElementById('carePillars')?.innerText);
+
+  divider();
+
+  section('Affirmation');
+  const aff = document.getElementById('affirmationText')?.innerText;
+  if (aff) drawText(aff, 12, 242, 207, 198, false);
+
+  divider();
+
+  drawText('The Moon changes sign every 2 to 3 days. Come back each time.', 9, 154, 143, 135, false);
+  drawText('That is the practice. That is how the pattern changes.', 9, 154, 143, 135, false);
+
+  doc.save(`Lunar-Sanctuary-${userData.name.replace(/\s+/g, '-')}.pdf`);
 }
 </script>
 </body>
